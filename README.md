@@ -15,10 +15,7 @@ This project is a dynamic portfolio website built using PHP. It is designed to s
 - **Interactive Project Displays:** Engaging project presentations.
 - **Responsive Design:** Optimized for multiple devices.
 
-## Video Demo
-Watch the video below for a walkthrough of the website's features and design:
 
-[![]
 
 ## Installation
 To set up the project locally, follow these steps:
