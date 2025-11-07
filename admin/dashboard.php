@@ -3,6 +3,9 @@ require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
+$baseUrl = rtrim($config['base_url'] ?? '', '/');
+$rootUrl = preg_replace('#/public$#', '', $baseUrl) ?: $baseUrl;
+
 $totalProjects = (int) $pdo->query('SELECT COUNT(*) FROM projects')->fetchColumn();
 $totalMessages = (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn();
 ?>
@@ -18,6 +21,7 @@ $totalMessages = (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
         <a href="projects.php">Projects</a>
+        <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
     <main class="admin-dashboard">

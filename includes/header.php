@@ -10,6 +10,7 @@ if (!isset($config)) {
 }
 
 $baseUrl = rtrim($config['base_url'], '/');
+$rootUrl = preg_replace('#/public$#', '', $baseUrl) ?: $baseUrl;
 $pageTitle = isset($pageTitle) ? $pageTitle . ' | ' : '';
 ?><!DOCTYPE html>
 <html lang="en">
@@ -27,6 +28,7 @@ $pageTitle = isset($pageTitle) ? $pageTitle . ' | ' : '';
             <li><a href="<?= $baseUrl ?>/">Projects</a></li>
             <li><a href="<?= $baseUrl ?>/about.php">About</a></li>
             <li><a href="<?= $baseUrl ?>/contact.php">Contact</a></li>
+            <li><a href="<?= $rootUrl ?>/admin/login.php">Admin</a></li>
         </ul>
     </nav>
 </header>

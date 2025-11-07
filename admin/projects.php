@@ -5,6 +5,7 @@ require_once __DIR__ . '/../includes/auth.php';
 
 $stmt = $pdo->query('SELECT id, title, slug, created_at FROM projects ORDER BY created_at DESC');
 $projects = $stmt->fetchAll();
+$baseUrl = rtrim($config['base_url'] ?? '', '/');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,7 @@ $projects = $stmt->fetchAll();
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
         <a href="projects.php">Projects</a>
+        <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
     <main class="admin-projects">

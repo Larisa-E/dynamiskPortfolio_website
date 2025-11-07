@@ -10,6 +10,7 @@ if (!empty($_SESSION['admin_id'])) {
 }
 
 $errors = [];
+$baseUrl = rtrim($config['base_url'] ?? '', '/');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -64,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
             <button type="submit">Sign in</button>
         </form>
+        <p class="admin-login__back"><a href="<?= $baseUrl ?>/">Back to site</a></p>
     </main>
 </body>
 </html>

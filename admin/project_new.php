@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 $errors = [];
+$baseUrl = rtrim($config['base_url'] ?? '', '/');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
         <a href="projects.php">Projects</a>
+        <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
     <main class="admin-form">

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$baseUrl = rtrim($config['base_url'] ?? '', '/');
 
 $stmt = $pdo->prepare('SELECT * FROM projects WHERE id = :id');
 $stmt->execute(['id' => $id]);
@@ -87,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
         <a href="projects.php">Projects</a>
+        <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
     <main class="admin-form">
