@@ -18,9 +18,23 @@ CREATE TABLE IF NOT EXISTS projects (
   short_description TEXT,
   description LONGTEXT,
   image VARCHAR(255),
+  demo_video_url VARCHAR(255),
   url VARCHAR(255),
   tech VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- About profile (single row)
+CREATE TABLE IF NOT EXISTS about_profiles (
+  id TINYINT UNSIGNED PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  intro TEXT,
+  body LONGTEXT NOT NULL,
+  signature VARCHAR(255),
+  profile_image VARCHAR(255),
+  github_url VARCHAR(255),
+  linkedin_url VARCHAR(255),
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 

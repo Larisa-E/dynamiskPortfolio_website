@@ -3,6 +3,8 @@ require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
+ensure_project_video_column($pdo);
+
 $stmt = $pdo->query('SELECT id, title, slug, created_at FROM projects ORDER BY created_at DESC');
 $projects = $stmt->fetchAll();
 $baseUrl = rtrim($config['base_url'] ?? '', '/');
@@ -18,7 +20,9 @@ $baseUrl = rtrim($config['base_url'] ?? '', '/');
 <body class="admin">
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
+        <a href="about.php">About Page</a>
         <a href="projects.php">Projects</a>
+        <a href="messages.php">Messages</a>
         <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>

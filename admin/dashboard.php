@@ -20,7 +20,9 @@ $totalMessages = (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn
 <body class="admin">
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
+        <a href="about.php">About Page</a>
         <a href="projects.php">Projects</a>
+        <a href="messages.php">Messages</a>
         <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
@@ -28,7 +30,7 @@ $totalMessages = (int) $pdo->query('SELECT COUNT(*) FROM messages')->fetchColumn
         <h1>Welcome back, <?= e($_SESSION['admin_username'] ?? '') ?></h1>
         <ul class="admin-stats">
             <li><strong><?= $totalProjects ?></strong> Projects</li>
-            <li><strong><?= $totalMessages ?></strong> Messages</li>
+            <li><a href="messages.php"><strong><?= $totalMessages ?></strong> Messages</a></li>
         </ul>
     </main>
 </body>

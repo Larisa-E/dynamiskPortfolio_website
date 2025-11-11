@@ -29,6 +29,7 @@ include __DIR__ . '/../includes/header.php';
 $imagePath = $project['image']
     ? $baseUrl . '/uploads/' . e($project['image'])
     : $baseUrl . '/assets/images/placeholder.svg';
+$videoMarkup = render_project_video($project['demo_video_url'] ?? null);
 ?>
 <article class="project-detail">
     <header class="project-detail__header">
@@ -38,7 +39,15 @@ $imagePath = $project['image']
         <?php endif; ?>
     </header>
 
-    <img class="project-detail__image" src="<?= $imagePath ?>" alt="<?= e($project['title']) ?>">
+    <?php if ($videoMarkup): ?>
+        <?= $videoMarkup ?>
+    <?php endif; ?>
+
+    <?php if (!empty($project['image'])): ?>
+        <a class="project-detail__image-link" href="<?= $imagePath ?>" target="_blank" rel="noopener">
+            <img class="project-detail__image" src="<?= $imagePath ?>" alt="<?= e($project['title']) ?>">
+        </a>
+    <?php endif; ?>
 
     <?php if (!empty($project['url'])): ?>
         <p class="project-detail__link"><a href="<?= e($project['url']) ?>" target="_blank" rel="noopener">View project</a></p>

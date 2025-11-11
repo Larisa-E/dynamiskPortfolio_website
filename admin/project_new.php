@@ -3,6 +3,8 @@ require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
+ensure_project_video_column($pdo);
+
 $errors = [];
 $baseUrl = rtrim($config['base_url'] ?? '', '/');
 
@@ -12,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = trim($_POST['description'] ?? '');
     $url = trim($_POST['url'] ?? '');
     $tech = trim($_POST['tech'] ?? '');
+    $videoUrl = trim($_POST['demo_video_url'] ?? '');
     $slug = make_slug($title);
     $imageName = null;
 
@@ -19,18 +22,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Title is required.';
     }
 
+    if ($videoUrl !== '' && !filter_var($videoUrl, FILTER_VALIDATE_URL)) {
+        $errors[] = 'Demo video must be a valid URL.';
+    }
+
     if (!$errors) {
         if (!empty($_FILES['image']['name'])) {
             $info = @getimagesize($_FILES['image']['tmp_name']);
-            $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+            $allowed = [
+                'image/jpeg' => 'jpg',
+                'image/png' => 'png',
+                'image/webp' => 'webp',
+                'image/gif' => 'gif',
+            ];
 
             if (!$info || !isset($allowed[$info['mime']])) {
                 $errors[] = 'Please upload a valid JPG, PNG, or WEBP image.';
             } else {
                 $ext = $allowed[$info['mime']];
                 $imageName = uniqid('proj_', true) . '.' . $ext;
-                $destination = __DIR__ . '/../public/uploads/' . $imageName;
-                if (!move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                $uploadDir = __DIR__ . '/../public/uploads/';
+                if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
+                    $errors[] = 'Image directory is missing and could not be created.';
+                }
+                $destination = $uploadDir . $imageName;
+                if (!$errors && !move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
                     $errors[] = 'Image upload failed.';
                 }
             }
@@ -38,13 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors) {
-        $stmt = $pdo->prepare('INSERT INTO projects (title, slug, short_description, description, image, url, tech) VALUES (:title, :slug, :short, :description, :image, :url, :tech)');
+        $stmt = $pdo->prepare('INSERT INTO projects (title, slug, short_description, description, image, demo_video_url, url, tech) VALUES (:title, :slug, :short, :description, :image, :video, :url, :tech)');
         $stmt->execute([
             'title' => $title,
             'slug' => $slug,
             'short' => $short,
             'description' => $description,
             'image' => $imageName,
+            'video' => $videoUrl !== '' ? $videoUrl : null,
             'url' => $url,
             'tech' => $tech,
         ]);
@@ -65,7 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="admin">
     <nav class="admin-nav">
         <a href="dashboard.php">Dashboard</a>
+        <a href="about.php">About Page</a>
         <a href="projects.php">Projects</a>
+        <a href="messages.php">Messages</a>
         <a href="<?= $baseUrl ?>/" target="_blank" rel="noopener">View Site</a>
         <a href="logout.php">Logout</a>
     </nav>
@@ -93,6 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
             <label>Project URL
                 <input type="url" name="url" value="<?= e($_POST['url'] ?? '') ?>">
+            </label>
+            <label>Demo video URL (optional)
+                <input type="url" name="demo_video_url" value="<?= e($_POST['demo_video_url'] ?? '') ?>" placeholder="https://youtu.be/...">
             </label>
             <label>Image
                 <input type="file" name="image" accept="image/jpeg,image/png,image/webp">

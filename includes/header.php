@@ -12,13 +12,15 @@ if (!isset($config)) {
 $baseUrl = rtrim($config['base_url'], '/');
 $rootUrl = preg_replace('#/public$#', '', $baseUrl) ?: $baseUrl;
 $pageTitle = isset($pageTitle) ? $pageTitle . ' | ' : '';
+$stylePath = __DIR__ . '/../public/assets/css/style.css';
+$styleVersion = file_exists($stylePath) ? filemtime($stylePath) : time();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle) ?>Larisa Portfolio</title>
-    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css?v=<?= $styleVersion ?>">
 </head>
 <body>
 <header class="site-header">
