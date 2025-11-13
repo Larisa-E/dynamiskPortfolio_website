@@ -66,19 +66,9 @@ Here is exactly how I set it up on a fresh machine:
 
   ![Managing contact messages](public/assets/gifs/mess.gif "Message inbox view and delete flow")
 
-## Working with media
-- Uploads live in `public/uploads/`, so I copy that folder across when I deploy.
-- Demo videos stay on YouTube/Vimeo (or hosted MP4) and I store the link with each project.
-- GIF recordings live in `public/assets/gifs/` so the README can show a quick tour without hitting the database.
-
 ## Database snapshot
 Here is a quick peek at the tables I designed.
 
 ![Database tables overview](public/assets/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
-
-## Ideas I still want to explore
-1. Automate screenshot generation so each project card always has a fresh visual.
-2. Add e-mail notifications when a new contact message arrives.
-3. Write a small test suite (PHPUnit or Pest) to guard the CRUD workflows.
 
 Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
