@@ -2,7 +2,7 @@
 
 This project is a friendly PHP site that lets you show your work, describe who you are, and keep track of contact messages in one place. The goal is to feel like a polished online resume that you can update without touching code every time.
 
-![Public site walkthrough](public/assets/images/gifs/home.gif "Landing page scroll through projects")
+![Public site walkthrough](public/assets/gifs/home.gif "Landing page scroll through projects")
 
 ## Why this project helps
 - Keeps your projects, about story, and contact inbox together.
@@ -54,16 +54,16 @@ This project is a friendly PHP site that lets you show your work, describe who y
 	- Public site: `http://localhost/dynamiskPortfolio_website/public`
 	- Admin login: `http://localhost/dynamiskPortfolio_website/admin/login.php`
 
-	![Admin login and dashboard](public/assets/images/gifs/admin.gif "Login and dashboard overview")
+	![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
 
 ## Admin tour
 - **Projects:** Add work with title, description, tools, screenshot, and optional demo video link (YouTube, Vimeo, or mp4).
 
-	![Editing projects and about page](public/assets/images/gifs/admin_edit.gif "Project CRUD and About editor demo")
+	![Editing projects and about page](public/assets/gifs/admin_edit.gif "Project CRUD and About editor demo")
 - **About Page:** Update your bio, hero text, and profile photo so the public page always feels current.
 - **Messages:** Read, archive, or delete contact form submissions without digging in the database.
 
-	![Managing contact messages](public/assets/images/gifs/mess.gif "Message inbox view and delete flow")
+	![Managing contact messages](public/assets/gifs/mess.gif "Message inbox view and delete flow")
 
 ## Media and uploads
 - Uploads live in `public/uploads/`. That folder is git-ignored so it will not appear on GitHub. Copy it manually when you deploy.
@@ -81,7 +81,7 @@ This project is a friendly PHP site that lets you show your work, describe who y
 - **Login fails?** Generate a fresh password hash and be sure it matches the username in `admins`.
 - **Images missing?** Confirm your local server can read files inside `public/uploads/` and that the folder exists.
 
-![Database tables overview](public/assets/images/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
+![Database tables overview](public/assets/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
 
 ## Next steps
 1. Record a short demo video and add the link to a featured project.
