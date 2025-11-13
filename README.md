@@ -1,91 +1,104 @@
 # Dynamisk Portfolio Website
 
-This project is a friendly PHP site that lets you show your work, describe who you are, and keep track of contact messages in one place. The goal is to feel like a polished online resume that you can update without touching code every time.
+I built this project to have a living, visual résumé that I can update without editing raw PHP every time. It lets me showcase recent work, tweak my story, and read messages in one place—everything runs on a simple PHP/MySQL stack that I can host almost anywhere.
 
 ![Public site walkthrough](public/assets/gifs/home.gif "Landing page scroll through projects")
 
-## Why this project helps
-- Keeps your projects, about story, and contact inbox together.
-- Lets you add images and demo videos so visitors see your work fast.
-- Uses a simple admin dashboard so you can edit content safely.
-- Runs on common tools (PHP, MySQL) so you can host it almost anywhere.
+## What I focussed on
+- Crafting a dark, cinematic layout that highlights each project card and demo video.
+- Building an admin dashboard so I can manage projects, bio content, and messages quickly.
+- Adding support for hosted video links, responsive imagery, and modern typography.
+- Keeping the stack lightweight (plain PHP, MySQL, Composer autoloading) so deployment stays easy.
 
-## What you need
-- PHP 8.1 or newer with Composer.
-- MySQL or MariaDB (XAMPP, WAMP, MAMP, Docker, etc. all work).
-- A web server that points to the `public/` folder.
+## How I put it together
+- **Backend:** I structured the content in MySQL (`projects`, `about`, `messages`, `admins`) and used PDO for secure database access.
+- **Admin tools:** I created CRUD forms for projects and a simple editor for the About page, both protected behind session-based auth.
+- **Frontend:** I refreshed the theme with layered gradients, Playfair Display headlines, and grid-based layouts that adapt from mobile to desktop.
+- **Contact flow:** The public form writes into the messages table, and the admin inbox lets me archive or delete submissions right away.
 
-## Fast setup guide
-1. **Download the code.**
-	```bash
-	git clone https://github.com/Larisa-E/dynamiskPortfolio_website.git
-	cd dynamiskPortfolio_website
-	```
-2. **Install PHP dependencies.**
-	```bash
-	composer install
-	```
-3. **Create your config file.**
-	```bash
-	cp config/config.sample.php config/config.php
-	```
-	On Windows PowerShell you can run:
-	```powershell
-	copy config/config.sample.php config/config.php
-	```
-	Open `config/config.php` and set:
-	- `base_url` to the URL that serves the `public/` folder.
-	- Database host, name, username, and password.
-4. **Load the database tables.**
-	```bash
-	mysql -u root -p < sql/schema.sql
-	```
-5. **Make an admin login.**
-	```bash
-	php -r "echo password_hash('admin123', PASSWORD_DEFAULT), PHP_EOL;"
-	```
-	Copy the hash that prints out, then insert it:
-	```sql
-	USE portfolio_db;
-	INSERT INTO admins (username, password_hash)
-	VALUES ('admin', '$2y$...paste-your-hash-here...');
-	```
-6. **Run it.** Start Apache/MySQL (or your preferred stack) and open:
-	- Public site: `http://localhost/dynamiskPortfolio_website/public`
-	- Admin login: `http://localhost/dynamiskPortfolio_website/admin/login.php`
+![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
 
-	![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
+# Dynamisk Portfolio Website
 
-## Admin tour
-- **Projects:** Add work with title, description, tools, screenshot, and optional demo video link (YouTube, Vimeo, or mp4).
+I built this project to have a living, visual résumé that I can update without editing raw PHP every time. It lets me showcase recent work, tweak my story, and read messages in one place—everything runs on a simple PHP/MySQL stack that I can host almost anywhere.
 
-	![Editing projects and about page](public/assets/gifs/admin_edit.gif "Project CRUD and About editor demo")
-- **About Page:** Update your bio, hero text, and profile photo so the public page always feels current.
-- **Messages:** Read, archive, or delete contact form submissions without digging in the database.
+![Public site walkthrough](public/assets/gifs/home.gif "Landing page scroll through projects")
 
-	![Managing contact messages](public/assets/gifs/mess.gif "Message inbox view and delete flow")
+## What I focussed on
+- Crafting a dark, cinematic layout that highlights each project card and demo video.
+- Building an admin dashboard so I can manage projects, bio content, and messages quickly.
+- Adding support for hosted video links, responsive imagery, and modern typography.
+- Keeping the stack lightweight (plain PHP, MySQL, Composer autoloading) so deployment stays easy.
 
-## Media and uploads
-- Uploads live in `public/uploads/`. That folder is git-ignored so it will not appear on GitHub. Copy it manually when you deploy.
-- Large videos are best hosted on YouTube/Vimeo, then link them in the demo video field.
-- Keep a local `assets` folder with screenshots or GIFs you want to show in the README or portfolio.
+## How I put it together
+- **Backend:** I structured the content in MySQL (`projects`, `about`, `messages`, `admins`) and used PDO for secure database access.
+- **Admin tools:** I created CRUD forms for projects and a simple editor for the About page, both protected behind session-based auth.
+- **Frontend:** I refreshed the theme with layered gradients, Playfair Display headlines, and grid-based layouts that adapt from mobile to desktop.
+- **Contact flow:** The public form writes into the messages table, and the admin inbox lets me archive or delete submissions right away.
 
-## Customization ideas
-- Swap colors, fonts, or spacing in `public/assets/css/style.css` (check the CSS variables at the top).
-- Add new fields to the database if you want categories, testimonials, or a blog.
-- Plug in an email service (SMTP, SendGrid, Mailgun) to forward contact messages straight to your inbox.
-- Add automated tests later (PHPUnit, Pest, Cypress) if you want to guard against regressions.
+![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
 
-## Troubleshooting
-- **Blank page?** Check `config/config.php` for the correct `base_url` and database info.
-- **Login fails?** Generate a fresh password hash and be sure it matches the username in `admins`.
-- **Images missing?** Confirm your local server can read files inside `public/uploads/` and that the folder exists.
+## Want to run it yourself?
+Here is exactly how I set it up on a fresh machine:
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Larisa-E/dynamiskPortfolio_website.git
+   cd dynamiskPortfolio_website
+   ```
+2. **Install Composer dependencies**
+   ```bash
+   composer install
+   ```
+3. **Create the configuration file**
+   ```bash
+   cp config/config.sample.php config/config.php
+   ```
+   PowerShell alternative:
+   ```powershell
+   copy config/config.sample.php config/config.php
+   ```
+   Then I update `config/config.php` with my base URL (pointing at `/public`) and database credentials.
+4. **Provision the database**
+   ```bash
+   mysql -u root -p < sql/schema.sql
+   ```
+5. **Seed an admin account**
+   ```bash
+   php -r "echo password_hash('admin123', PASSWORD_DEFAULT), PHP_EOL;"
+   ```
+   I copy the hash and insert it manually:
+   ```sql
+   USE portfolio_db;
+   INSERT INTO admins (username, password_hash)
+   VALUES ('admin', '$2y$...paste-your-hash-here...');
+   ```
+6. **Start the stack and browse**
+   - Public site: `http://localhost/dynamiskPortfolio_website/public`
+   - Admin login: `http://localhost/dynamiskPortfolio_website/admin/login.php`
+
+## Inside the admin area
+- **Projects:** I can add titles, descriptions, tech tags, screenshots, and demo video URLs.
+
+  ![Editing projects and about page](public/assets/gifs/admin_edit.gif "Project CRUD and About editor demo")
+- **About Page:** Updating my bio, hero copy, and profile photo instantly refreshes the public site.
+- **Messages:** Every contact form submission lands in the inbox so I can read or remove it with a click.
+
+  ![Managing contact messages](public/assets/gifs/mess.gif "Message inbox view and delete flow")
+
+## Working with media
+- Uploads live in `public/uploads/`, so I copy that folder across when I deploy.
+- Demo videos stay on YouTube/Vimeo (or hosted MP4) and I store the link with each project.
+- GIF recordings live in `public/assets/gifs/` so the README can show a quick tour without hitting the database.
+
+## Database snapshot
+Here is a quick peek at the tables I designed.
 
 ![Database tables overview](public/assets/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
 
-## Next steps
-1. Record a short demo video and add the link to a featured project.
-2. Add screenshots or GIFs to `public/assets/images/` for extra polish.
-3. Document your deployment process (shared hosting, VPS, etc.) once you push the site live.
+## Ideas I still want to explore
+1. Automate screenshot generation so each project card always has a fresh visual.
+2. Add e-mail notifications when a new contact message arrives.
+3. Write a small test suite (PHPUnit or Pest) to guard the CRUD workflows.
 
-Thanks for exploring the project! Feel free to open an issue or share ideas for improvements.
+Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
