@@ -18,26 +18,6 @@ I built this project to have a living, visual résumé that I can update without
 
 ![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
 
-# Dynamisk Portfolio Website
-
-I built this project to have a living, visual résumé that I can update without editing raw PHP every time. It lets me showcase recent work, tweak my story, and read messages in one place—everything runs on a simple PHP/MySQL stack that I can host almost anywhere.
-
-![Public site walkthrough](public/assets/gifs/home.gif "Landing page scroll through projects")
-
-## What I focussed on
-- Crafting a dark, cinematic layout that highlights each project card and demo video.
-- Building an admin dashboard so I can manage projects, bio content, and messages quickly.
-- Adding support for hosted video links, responsive imagery, and modern typography.
-- Keeping the stack lightweight (plain PHP, MySQL, Composer autoloading) so deployment stays easy.
-
-## How I put it together
-- **Backend:** I structured the content in MySQL (`projects`, `about`, `messages`, `admins`) and used PDO for secure database access.
-- **Admin tools:** I created CRUD forms for projects and a simple editor for the About page, both protected behind session-based auth.
-- **Frontend:** I refreshed the theme with layered gradients, Playfair Display headlines, and grid-based layouts that adapt from mobile to desktop.
-- **Contact flow:** The public form writes into the messages table, and the admin inbox lets me archive or delete submissions right away.
-
-![Admin login and dashboard](public/assets/gifs/admin.gif "Login and dashboard overview")
-
 ## Want to run it yourself?
 Here is exactly how I set it up on a fresh machine:
 
