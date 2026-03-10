@@ -113,9 +113,8 @@ function render_video_markup(?string $url, int $depth): string
     return '<p class="project-detail__video-link"><a href="' . e($url) . '" target="_blank" rel="noopener">Watch project demo</a></p>';
 }
 
-function build_skill_snapshot(array $projects, int $limit = 14): array
+function normalize_skill_label(string $token): string
 {
-    $counts = [];
     $normalize = [
         'MICROSOFT SQL SERVER' => 'SQL Server',
         'SSMS' => 'SSMS',
@@ -132,15 +131,36 @@ function build_skill_snapshot(array $projects, int $limit = 14): array
         'JAVASCRIPT' => 'JavaScript',
         'PHP' => 'PHP',
         'JSON' => 'JSON',
+        'LDAP' => 'LDAP',
+        'LDAPS' => 'LDAPS',
         'C#' => 'C#',
         '.NET MAUI' => '.NET MAUI',
+        'XAML' => 'XAML',
         'SIGNALR' => 'SignalR',
         'ACTIVE DIRECTORY' => 'Active Directory',
         'BOOTSTRAP 5' => 'Bootstrap',
         'BOOTSTRAP' => 'Bootstrap',
+        'ORACLE SQL' => 'Oracle SQL',
+        'SQL DEVELOPER' => 'SQL Developer',
+        'RELATIONAL MODELING' => 'Relational Modeling',
+        'VIEWS' => 'Views',
         'WINDOWS SERVER' => 'Windows Server',
         'XAMPP' => 'XAMPP',
     ];
+
+    return $normalize[$token] ?? ucwords(strtolower($token));
+}
+
+function build_skill_groups(array $projects): array
+{
+    $groupMap = [
+        'Frontend' => ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JSON', 'Fetch API', 'XAML'],
+        'Backend' => ['PHP', 'C#', '.NET MAUI', 'SignalR', 'HTTP APIs', 'Sessions', 'Active Directory', 'LDAP', 'LDAPS'],
+        'Data' => ['MySQL', 'MariaDB', 'SQL Server', 'T-SQL', 'PL/SQL', 'Oracle SQL', 'SQL Developer', 'Relational Modeling', 'Data Modeler', 'ER Modeling', 'Views', 'SSMS'],
+        'Tools' => ['Git', 'GitHub', 'XAMPP', 'Windows Server'],
+    ];
+
+    $skillsSeen = [];
 
     foreach ($projects as $project) {
         $techRaw = trim((string) ($project['tech'] ?? ''));
@@ -155,20 +175,41 @@ function build_skill_snapshot(array $projects, int $limit = 14): array
                 continue;
             }
 
-            $label = $normalize[$token] ?? ucwords(strtolower($token));
-            $key = strtolower($label);
-            $counts[$key] = [
-                'label' => $label,
-                'count' => ($counts[$key]['count'] ?? 0) + 1,
-            ];
+            $label = normalize_skill_label($token);
+            $skillsSeen[strtolower($label)] = $label;
         }
     }
 
-    usort($counts, static function (array $a, array $b): int {
-        return $b['count'] <=> $a['count'] ?: strcasecmp($a['label'], $b['label']);
-    });
+    $grouped = [
+        'Frontend' => [],
+        'Backend' => [],
+        'Data' => [],
+        'Tools' => [],
+        'Soft' => ['Structured', 'Curious', 'Proactive', 'Teamplayer', 'Learning-minded'],
+    ];
 
-    return array_slice(array_map(static fn(array $x): string => $x['label'], $counts), 0, $limit);
+    foreach ($skillsSeen as $label) {
+        $placed = false;
+        foreach ($groupMap as $group => $items) {
+            if (in_array($label, $items, true)) {
+                $grouped[$group][] = $label;
+                $placed = true;
+                break;
+            }
+        }
+
+        if (!$placed) {
+            $grouped['Tools'][] = $label;
+        }
+    }
+
+    foreach ($grouped as $group => $items) {
+        $unique = array_values(array_unique($items));
+        sort($unique, SORT_NATURAL | SORT_FLAG_CASE);
+        $grouped[$group] = $unique;
+    }
+
+    return $grouped;
 }
 
 function shell_page(string $title, string $body, int $depth, string $active): string
@@ -221,7 +262,7 @@ function write_html(string $path, string $content): void
 
 $projects = $pdo->query('SELECT id, title, slug, short_description, description, image, demo_video_url, url, tech FROM projects ORDER BY created_at DESC')->fetchAll();
 $featuredProject = $projects[0] ?? null;
-$skillsSnapshot = build_skill_snapshot($projects);
+$skillsByGroup = build_skill_groups($projects);
 
 $aboutStmt = $pdo->prepare('SELECT title, intro, body, signature, profile_image, github_url, linkedin_url FROM about_profiles WHERE id = :id LIMIT 1');
 $aboutStmt->execute(['id' => 1]);
@@ -238,47 +279,28 @@ $indexBody = '<section class="home-hero">\n'
     . '    </div>\n'
     . '</section>\n';
 
-$indexBody .= '<section class="career-strip">\n'
-    . '    <article class="career-strip__item">\n'
-    . '        <h2>Current Focus</h2>\n'
-    . '        <p>Building end-to-end solutions with PHP, JavaScript, SQL, and C# while improving testing, debugging, and deployment habits.</p>\n'
-    . '    </article>\n'
-    . '    <article class="career-strip__item">\n'
-    . '        <h2>Education</h2>\n'
-    . '        <p>Data Technician with specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</p>\n'
-    . '    </article>\n'
-    . '    <article class="career-strip__item">\n'
-    . '        <h2>Career Goal</h2>\n'
-    . '        <p>Seeking a student or junior full-stack role to contribute on product features, data flows, and backend-driven web apps.</p>\n'
-    . '    </article>\n'
-    . '</section>\n';
+$indexBody .= '<section class="skills-board">\n'
+    . '    <h2 class="skills-board__title">Skills</h2>\n'
+    . '    <div class="skills-board__grid">\n';
 
-if ($skillsSnapshot !== []) {
-    $indexBody .= '<section class="skills-snapshot">\n'
-        . '    <h2 class="skills-snapshot__title">Skills From My Project Repositories</h2>\n'
-        . '    <div class="skills-snapshot__chips">\n';
-
-    foreach ($skillsSnapshot as $skill) {
-        $indexBody .= '        <span class="skill-chip">' . e($skill) . '</span>\n';
+foreach ($skillsByGroup as $groupName => $skills) {
+    if ($skills === []) {
+        continue;
     }
 
-    $indexBody .= '    </div>\n'
-        . '</section>\n';
+    $indexBody .= '        <article class="skills-column">\n'
+        . '            <h3 class="skills-column__title">' . e($groupName) . '</h3>\n'
+        . '            <div class="skills-column__chips">\n';
+
+    foreach ($skills as $skill) {
+        $indexBody .= '                <span class="skill-chip">' . e($skill) . '</span>\n';
+    }
+
+    $indexBody .= '            </div>\n'
+        . '        </article>\n';
 }
 
-$indexBody .= '<section class="value-grid">\n'
-    . '    <article class="value-grid__item">\n'
-    . '        <h2>Frontend</h2>\n'
-    . '        <p>Responsive interfaces with clear navigation, strong hierarchy, and practical usability.</p>\n'
-    . '    </article>\n'
-    . '    <article class="value-grid__item">\n'
-    . '        <h2>Backend</h2>\n'
-    . '        <p>Authentication, data modeling, and server-side logic built for maintainability and real workflows.</p>\n'
-    . '    </article>\n'
-    . '    <article class="value-grid__item">\n'
-    . '        <h2>Database</h2>\n'
-    . '        <p>Relational schema design, SQL query structure, and business-rule thinking across MySQL, SQL Server, and Oracle.</p>\n'
-    . '    </article>\n'
+$indexBody .= '    </div>\n'
     . '</section>\n';
 
 if ($featuredProject) {
