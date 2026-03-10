@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lending Database System (Oracle) | Larisa Portfolio</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <a class="nav__brand" href="../../index.html">Larisa Portfolio</a>
+        <ul class="nav__links">
+            <li><a href="../../index.html" class="is-active">Projects</a></li>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="site-main">
+<article class="project-detail">
+    <header class="project-detail__header">
+        <h1>Lending Database System (Oracle)</h1>
+        <p class="project-detail__tech">Tech stack: Oracle SQL, SQL Developer, PL/SQL Triggers, Views, Data Modeler</p>
+    </header>
+    <a class="project-detail__image-link" href="../../uploads/lending-db-system.png" target="_blank" rel="noopener">
+        <img class="project-detail__image" src="../../uploads/lending-db-system.png" alt="Lending Database System (Oracle)">
+    </a>
+    <p class="project-detail__link"><a href="https://github.com/Larisa-E/lending_db_system" target="_blank" rel="noopener">View project</a></p>
+    <div class="project-detail__content">This project models a lending workflow for computers and students using Oracle-first design conventions (VARCHAR2, NUMBER, DATE, CLOB). I built a normalized schema with lookup tables, core transaction tables, constraints, indexes, and triggers that enforce key rules such as blacklist checks and automatic due-date defaults. I also created operational views (V_ACTIVE_LOANS, V_OVERDUE_LOANS, V_AVAILABLE_COMPUTERS, V_LOAN_HISTORY) to simplify common reporting and dashboard-style queries. To extend the workflow, I implemented an email queue simulation that inserts reminders for overdue loans, and documented full environment setup plus ERD reverse-engineering from the live schema.</div>
+    <p><a href="../../index.html">&larr; Back to projects</a></p>
+</article>
+</main>
+<footer class="site-footer">
+    <p>&copy; 2026 Larisa Portfolio. All rights reserved.</p>
+</footer>
+<script src="../../assets/js/script.js"></script>
+</body>
+</html>

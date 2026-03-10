@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact | Larisa Portfolio</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <a class="nav__brand" href="index.html">Larisa Portfolio</a>
+        <ul class="nav__links">
+            <li><a href="index.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="is-active">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="site-main">
+<section class="contact">
+    <h1>Contact</h1>
+    <p class="contact__success">This static site does not save messages in a database. Use email below.</p>
+    <form action="mailto:63336@edu.sde.dk" method="post" enctype="text/plain" class="contact__form">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>Message<textarea name="message" rows="5" required></textarea></label>
+        <button type="submit">Send message</button>
+    </form>
+</section>
+</main>
+<footer class="site-footer">
+    <p>&copy; 2026 Larisa Portfolio. All rights reserved.</p>
+</footer>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

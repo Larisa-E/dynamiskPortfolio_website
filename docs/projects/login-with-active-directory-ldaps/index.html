@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login with Active Directory (LDAPS) | Larisa Portfolio</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <a class="nav__brand" href="../../index.html">Larisa Portfolio</a>
+        <ul class="nav__links">
+            <li><a href="../../index.html" class="is-active">Projects</a></li>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="site-main">
+<article class="project-detail">
+    <header class="project-detail__header">
+        <h1>Login with Active Directory (LDAPS)</h1>
+        <p class="project-detail__tech">Tech stack: PHP, LDAP, LDAPS, Active Directory, Windows Server, XAMPP, Sessions</p>
+    </header>
+    <a class="project-detail__image-link" href="../../uploads/login-with-ad.png" target="_blank" rel="noopener">
+        <img class="project-detail__image" src="../../uploads/login-with-ad.png" alt="Login with Active Directory (LDAPS)">
+    </a>
+    <p class="project-detail__link"><a href="https://github.com/Larisa-E/login-with-ad" target="_blank" rel="noopener">View project</a></p>
+    <div class="project-detail__content">This project demonstrates enterprise-style authentication by integrating a PHP login system with Microsoft Active Directory using encrypted LDAPS (port 636). Instead of storing passwords in the app, credentials are verified through LDAP bind against the domain controller, then protected routes are unlocked with session-based access control. I implemented login/logout flow, protected welcome page access, and audit logging that records timestamp, username, IP, and success or failure. A major part of the work was operational setup and troubleshooting certificate trust for self-signed LDAPS in a lab environment, including OpenSSL and PHP trust configuration with reproducible setup documentation.</div>
+    <p><a href="../../index.html">&larr; Back to projects</a></p>
+</article>
+</main>
+<footer class="site-footer">
+    <p>&copy; 2026 Larisa Portfolio. All rights reserved.</p>
+</footer>
+<script src="../../assets/js/script.js"></script>
+</body>
+</html>

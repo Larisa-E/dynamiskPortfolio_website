@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dog API Gallery | Larisa Portfolio</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <a class="nav__brand" href="../../index.html">Larisa Portfolio</a>
+        <ul class="nav__links">
+            <li><a href="../../index.html" class="is-active">Projects</a></li>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="site-main">
+<article class="project-detail">
+    <header class="project-detail__header">
+        <h1>Dog API Gallery</h1>
+        <p class="project-detail__tech">Tech stack: HTML, CSS, JavaScript, PHP, Fetch API, JSON, Bootstrap</p>
+    </header>
+    <a class="project-detail__image-link" href="../../uploads/dog-api-gallery.gif" target="_blank" rel="noopener">
+        <img class="project-detail__image" src="../../uploads/dog-api-gallery.gif" alt="Dog API Gallery">
+    </a>
+    <p class="project-detail__link"><a href="https://github.com/Larisa-E/Dog_API" target="_blank" rel="noopener">View project</a></p>
+    <div class="project-detail__content">Dog API Gallery is a frontend-focused web app where users can search dog breeds, optionally filter by sub-breed, and browse images in a paginated gallery. I structured the app into modular JavaScript layers (api.js, ui.js, modal.js, app.js) to keep responsibilities clear and maintainable. The project includes robust request handling with timeout and fallback logic, so the app can recover if the PHP proxy endpoint fails by switching to direct public API calls. I also implemented a full-screen modal with download support, loading and error states, and a responsive layout for a smooth experience across devices.</div>
+    <p><a href="../../index.html">&larr; Back to projects</a></p>
+</article>
+</main>
+<footer class="site-footer">
+    <p>&copy; 2026 Larisa Portfolio. All rights reserved.</p>
+</footer>
+<script src="../../assets/js/script.js"></script>
+</body>
+</html>
