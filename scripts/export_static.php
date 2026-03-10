@@ -113,6 +113,64 @@ function render_video_markup(?string $url, int $depth): string
     return '<p class="project-detail__video-link"><a href="' . e($url) . '" target="_blank" rel="noopener">Watch project demo</a></p>';
 }
 
+function build_skill_snapshot(array $projects, int $limit = 14): array
+{
+    $counts = [];
+    $normalize = [
+        'MICROSOFT SQL SERVER' => 'SQL Server',
+        'SSMS' => 'SSMS',
+        'MYSQLI' => 'MySQL',
+        'MYSQL' => 'MySQL',
+        'MARIADB' => 'MariaDB',
+        'PL/SQL TRIGGERS' => 'PL/SQL',
+        'HTTP APIS' => 'HTTP APIs',
+        'FETCH API' => 'Fetch API',
+        'T-SQL' => 'T-SQL',
+        'ER MODELING' => 'ER Modeling',
+        'HTML' => 'HTML',
+        'CSS' => 'CSS',
+        'JAVASCRIPT' => 'JavaScript',
+        'PHP' => 'PHP',
+        'JSON' => 'JSON',
+        'C#' => 'C#',
+        '.NET MAUI' => '.NET MAUI',
+        'SIGNALR' => 'SignalR',
+        'ACTIVE DIRECTORY' => 'Active Directory',
+        'BOOTSTRAP 5' => 'Bootstrap',
+        'BOOTSTRAP' => 'Bootstrap',
+        'WINDOWS SERVER' => 'Windows Server',
+        'XAMPP' => 'XAMPP',
+    ];
+
+    foreach ($projects as $project) {
+        $techRaw = trim((string) ($project['tech'] ?? ''));
+        if ($techRaw === '') {
+            continue;
+        }
+
+        $parts = preg_split('/\s*,\s*/', $techRaw) ?: [];
+        foreach ($parts as $part) {
+            $token = strtoupper(trim($part));
+            if ($token === '') {
+                continue;
+            }
+
+            $label = $normalize[$token] ?? ucwords(strtolower($token));
+            $key = strtolower($label);
+            $counts[$key] = [
+                'label' => $label,
+                'count' => ($counts[$key]['count'] ?? 0) + 1,
+            ];
+        }
+    }
+
+    usort($counts, static function (array $a, array $b): int {
+        return $b['count'] <=> $a['count'] ?: strcasecmp($a['label'], $b['label']);
+    });
+
+    return array_slice(array_map(static fn(array $x): string => $x['label'], $counts), 0, $limit);
+}
+
 function shell_page(string $title, string $body, int $depth, string $active): string
 {
     $prefix = str_repeat('../', $depth);
@@ -163,6 +221,7 @@ function write_html(string $path, string $content): void
 
 $projects = $pdo->query('SELECT id, title, slug, short_description, description, image, demo_video_url, url, tech FROM projects ORDER BY created_at DESC')->fetchAll();
 $featuredProject = $projects[0] ?? null;
+$skillsSnapshot = build_skill_snapshot($projects);
 
 $aboutStmt = $pdo->prepare('SELECT title, intro, body, signature, profile_image, github_url, linkedin_url FROM about_profiles WHERE id = :id LIMIT 1');
 $aboutStmt->execute(['id' => 1]);
@@ -170,9 +229,56 @@ $about = $aboutStmt->fetch() ?: null;
 
 // index.html
 $indexBody = '<section class="home-hero">\n'
-    . '    <p class="home-hero__kicker">Frontend Developer Portfolio</p>\n'
-    . '    <h1 class="home-hero__title">I build practical web projects with strong UI, clean structure, and real-world workflows.</h1>\n'
-    . '    <p class="home-hero__text">This public site is the static version of my portfolio. It highlights selected projects with visuals, technology stacks, and implementation details.</p>\n'
+    . '    <p class="home-hero__kicker">Full-Stack Developer Portfolio</p>\n'
+    . '    <h1 class="home-hero__title">I design and build full-stack web projects with practical UX, strong backend structure, and production-minded workflows.</h1>\n'
+    . '    <p class="home-hero__text">Data Technician student specialized in Programming at Syddansk Erhvervsskole, currently building across frontend, backend, SQL systems, and application architecture.</p>\n'
+    . '    <div class="home-hero__actions">\n'
+    . '        <a class="project-card__button" href="./contact.html">Contact me</a>\n'
+    . '        <a class="project-card__button project-card__button--ghost" href="./about.html">Read my profile</a>\n'
+    . '    </div>\n'
+    . '</section>\n';
+
+$indexBody .= '<section class="career-strip">\n'
+    . '    <article class="career-strip__item">\n'
+    . '        <h2>Current Focus</h2>\n'
+    . '        <p>Building end-to-end solutions with PHP, JavaScript, SQL, and C# while improving testing, debugging, and deployment habits.</p>\n'
+    . '    </article>\n'
+    . '    <article class="career-strip__item">\n'
+    . '        <h2>Education</h2>\n'
+    . '        <p>Data Technician with specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</p>\n'
+    . '    </article>\n'
+    . '    <article class="career-strip__item">\n'
+    . '        <h2>Career Goal</h2>\n'
+    . '        <p>Seeking a student or junior full-stack role to contribute on product features, data flows, and backend-driven web apps.</p>\n'
+    . '    </article>\n'
+    . '</section>\n';
+
+if ($skillsSnapshot !== []) {
+    $indexBody .= '<section class="skills-snapshot">\n'
+        . '    <h2 class="skills-snapshot__title">Skills From My Project Repositories</h2>\n'
+        . '    <div class="skills-snapshot__chips">\n';
+
+    foreach ($skillsSnapshot as $skill) {
+        $indexBody .= '        <span class="skill-chip">' . e($skill) . '</span>\n';
+    }
+
+    $indexBody .= '    </div>\n'
+        . '</section>\n';
+}
+
+$indexBody .= '<section class="value-grid">\n'
+    . '    <article class="value-grid__item">\n'
+    . '        <h2>Frontend</h2>\n'
+    . '        <p>Responsive interfaces with clear navigation, strong hierarchy, and practical usability.</p>\n'
+    . '    </article>\n'
+    . '    <article class="value-grid__item">\n'
+    . '        <h2>Backend</h2>\n'
+    . '        <p>Authentication, data modeling, and server-side logic built for maintainability and real workflows.</p>\n'
+    . '    </article>\n'
+    . '    <article class="value-grid__item">\n'
+    . '        <h2>Database</h2>\n'
+    . '        <p>Relational schema design, SQL query structure, and business-rule thinking across MySQL, SQL Server, and Oracle.</p>\n'
+    . '    </article>\n'
     . '</section>\n';
 
 if ($featuredProject) {
