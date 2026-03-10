@@ -439,6 +439,30 @@ h6 {
     font-weight: 600;
 }
 
+.about__panel {
+    background: rgba(18, 27, 32, 0.85);
+    border: 1px solid rgba(245, 236, 221, 0.08);
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.about__panel h2 {
+    font-size: 1.2rem;
+}
+
+.about__panel p {
+    color: var(--color-muted);
+}
+
+.about__list {
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.45rem;
+    color: var(--color-muted);
+}
+
 .about__social {
     display: flex;
     flex-wrap: wrap;
