@@ -162,14 +162,68 @@ function write_html(string $path, string $content): void
 }
 
 $projects = $pdo->query('SELECT id, title, slug, short_description, description, image, demo_video_url, url, tech FROM projects ORDER BY created_at DESC')->fetchAll();
+$featuredProject = $projects[0] ?? null;
 
 $aboutStmt = $pdo->prepare('SELECT title, intro, body, signature, profile_image, github_url, linkedin_url FROM about_profiles WHERE id = :id LIMIT 1');
 $aboutStmt->execute(['id' => 1]);
 $about = $aboutStmt->fetch() ?: null;
 
 // index.html
-$indexBody = '<section class="projects">\n'
-    . '    <h1 class="projects__title">Latest Projects</h1>\n'
+$indexBody = '<section class="home-hero">\n'
+    . '    <p class="home-hero__kicker">Frontend Developer Portfolio</p>\n'
+    . '    <h1 class="home-hero__title">I build practical web projects with strong UI, clean structure, and real-world workflows.</h1>\n'
+    . '    <p class="home-hero__text">This public site is the static version of my portfolio. It highlights selected projects with visuals, technology stacks, and implementation details.</p>\n'
+    . '</section>\n';
+
+if ($featuredProject) {
+    $fSlug = $featuredProject['slug'];
+    $fTitle = $featuredProject['title'];
+    $fTech = trim((string) ($featuredProject['tech'] ?? ''));
+    $fShort = trim((string) ($featuredProject['short_description'] ?? ''));
+    $fVideo = trim((string) ($featuredProject['demo_video_url'] ?? ''));
+    $fRepo = trim((string) ($featuredProject['url'] ?? ''));
+    $fImg = !empty($featuredProject['image'])
+        ? './uploads/' . rawurlencode($featuredProject['image'])
+        : './assets/images/placeholder.svg';
+
+    if (is_direct_video_url($fVideo)) {
+        $fSrc = normalize_media_url($fVideo, 0);
+        $fPoster = !empty($featuredProject['image']) ? ' poster="' . e($fImg) . '"' : '';
+        $featuredMedia = '<video class="featured-project__media" autoplay muted loop playsinline preload="metadata"' . $fPoster . ' aria-label="' . e($fTitle) . ' preview"><source src="' . e($fSrc) . '"></video>';
+    } else {
+        $featuredMedia = '<img class="featured-project__media" src="' . e($fImg) . '" alt="' . e($fTitle) . '">';
+    }
+
+    $indexBody .= '<section class="featured-project">\n'
+        . '    <p class="featured-project__label">Featured Project</p>\n'
+        . '    <div class="featured-project__panel">\n'
+        . '        <a class="featured-project__link" href="./projects/' . rawurlencode($fSlug) . '/">' . $featuredMedia . '</a>\n'
+        . '        <div class="featured-project__content">\n'
+        . '            <h2><a href="./projects/' . rawurlencode($fSlug) . '/">' . e($fTitle) . '</a></h2>\n';
+
+    if ($fTech !== '') {
+        $indexBody .= '            <p class="project-card__tech">Tech: ' . e($fTech) . '</p>\n';
+    }
+
+    if ($fShort !== '') {
+        $indexBody .= '            <p class="project-card__summary">' . e($fShort) . '</p>\n';
+    }
+
+    $indexBody .= '            <div class="project-card__actions">\n'
+        . '                <a class="project-card__button" href="./projects/' . rawurlencode($fSlug) . '/">View details</a>\n';
+
+    if ($fRepo !== '') {
+        $indexBody .= '                <a class="project-card__button project-card__button--ghost" href="' . e($fRepo) . '" target="_blank" rel="noopener">GitHub</a>\n';
+    }
+
+    $indexBody .= '            </div>\n'
+        . '        </div>\n'
+        . '    </div>\n'
+        . '</section>\n';
+}
+
+$indexBody .= '<section class="projects">\n'
+    . '    <h2 class="projects__title">Latest Projects</h2>\n'
     . '    <div class="projects__grid">\n';
 
 foreach ($projects as $project) {
@@ -178,6 +232,7 @@ foreach ($projects as $project) {
     $short = trim((string) ($project['short_description'] ?? ''));
     $tech = trim((string) ($project['tech'] ?? ''));
     $videoUrl = trim((string) ($project['demo_video_url'] ?? ''));
+    $repoUrl = trim((string) ($project['url'] ?? ''));
 
     $img = !empty($project['image'])
         ? './uploads/' . rawurlencode($project['image'])
@@ -206,6 +261,15 @@ foreach ($projects as $project) {
     if ($short !== '') {
         $indexBody .= '            <p class="project-card__summary">' . e($short) . '</p>\n';
     }
+
+    $indexBody .= '            <div class="project-card__actions">\n'
+        . '                <a class="project-card__button" href="./projects/' . rawurlencode($slug) . '/">View details</a>\n';
+
+    if ($repoUrl !== '') {
+        $indexBody .= '                <a class="project-card__button project-card__button--ghost" href="' . e($repoUrl) . '" target="_blank" rel="noopener">GitHub</a>\n';
+    }
+
+    $indexBody .= '            </div>\n';
 
     $indexBody .= '        </article>\n';
 }

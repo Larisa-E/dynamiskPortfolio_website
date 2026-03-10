@@ -18,8 +18,28 @@
     </nav>
 </header>
 <main class="site-main">
+<section class="home-hero">
+    <p class="home-hero__kicker">Frontend Developer Portfolio</p>
+    <h1 class="home-hero__title">I build practical web projects with strong UI, clean structure, and real-world workflows.</h1>
+    <p class="home-hero__text">This public site is the static version of my portfolio. It highlights selected projects with visuals, technology stacks, and implementation details.</p>
+</section>
+<section class="featured-project">
+    <p class="featured-project__label">Featured Project</p>
+    <div class="featured-project__panel">
+        <a class="featured-project__link" href="./projects/dog-api-gallery/"><img class="featured-project__media" src="./uploads/dog-api-gallery.gif" alt="Dog API Gallery"></a>
+        <div class="featured-project__content">
+            <h2><a href="./projects/dog-api-gallery/">Dog API Gallery</a></h2>
+            <p class="project-card__tech">Tech: HTML, CSS, JavaScript, PHP, Fetch API, JSON, Bootstrap</p>
+            <p class="project-card__summary">A responsive dog image gallery that integrates Dog CEO API with breed and sub-breed filtering, modal preview, and graceful fallback handling.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/dog-api-gallery/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/Dog_API" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="projects">
-    <h1 class="projects__title">Latest Projects</h1>
+    <h2 class="projects__title">Latest Projects</h2>
     <div class="projects__grid">
         <article class="project-card">
             <a class="project-card__link" href="./projects/dog-api-gallery/">
@@ -28,6 +48,10 @@
             </a>
             <p class="project-card__tech">Tech: HTML, CSS, JavaScript, PHP, Fetch API, JSON, Bootstrap</p>
             <p class="project-card__summary">A responsive dog image gallery that integrates Dog CEO API with breed and sub-breed filtering, modal preview, and graceful fallback handling.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/dog-api-gallery/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/Dog_API" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/login-with-active-directory-ldaps/">
@@ -36,6 +60,10 @@
             </a>
             <p class="project-card__tech">Tech: PHP, LDAP, LDAPS, Active Directory, Windows Server, XAMPP, Sessions</p>
             <p class="project-card__summary">A secure PHP authentication app that validates users against Microsoft Active Directory over LDAPS with session control and audit logging.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/login-with-active-directory-ldaps/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/login-with-ad" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/pagajclubdb-kayak-club-database/">
@@ -44,6 +72,10 @@
             </a>
             <p class="project-card__tech">Tech: Microsoft SQL Server, T-SQL, ER Modeling, SSMS</p>
             <p class="project-card__summary">A relational SQL Server database for kayak club operations with realistic sample data, referential integrity, and practical reporting queries.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/pagajclubdb-kayak-club-database/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/PagajClubDB" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/lending-database-system-oracle/">
@@ -52,6 +84,10 @@
             </a>
             <p class="project-card__tech">Tech: Oracle SQL, SQL Developer, PL/SQL Triggers, Views, Data Modeler</p>
             <p class="project-card__summary">An Oracle-based lending system with normalized schema, operational views, trigger-driven business rules, and overdue reminder simulation.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/lending-database-system-oracle/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/lending_db_system" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/kaostek/">
@@ -60,6 +96,10 @@
             </a>
             <p class="project-card__tech">Tech: PHP, MySQL, MariaDB, Bootstrap 5, HTML, Sessions, mysqli</p>
             <p class="project-card__summary">A lightweight PHP and MySQL customer-order dashboard with authentication, normalized data model, and view-based reporting.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/kaostek/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/KaosTek" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/bogsalg-bookstore-database/">
@@ -68,6 +108,10 @@
             </a>
             <p class="project-card__tech">Tech: Microsoft SQL Server, T-SQL, Relational Modeling, SSMS</p>
             <p class="project-card__summary">A production-style bookstore relational database with idempotent SQL scripts, integrity constraints, and end-to-end CRUD task validation.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/bogsalg-bookstore-database/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/Bogsalg_db" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
         <article class="project-card">
             <a class="project-card__link" href="./projects/greenchatmobilemaui/">
@@ -76,6 +120,10 @@
             </a>
             <p class="project-card__tech">Tech: .NET MAUI, C#, XAML, SignalR, HTTP APIs</p>
             <p class="project-card__summary">A cross-platform .NET MAUI chat app concept featuring real-time messaging, authentication flow, and discussion threads.</p>
+            <div class="project-card__actions">
+                <a class="project-card__button" href="./projects/greenchatmobilemaui/">View details</a>
+                <a class="project-card__button project-card__button--ghost" href="https://github.com/Larisa-E/GreenChatMobile" target="_blank" rel="noopener">GitHub</a>
+            </div>
         </article>
     </div>
 </section>

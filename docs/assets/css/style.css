@@ -113,6 +113,73 @@ h6 {
     gap: 2.5rem;
 }
 
+.home-hero {
+    background: linear-gradient(140deg, rgba(19, 42, 42, 0.92), rgba(12, 24, 27, 0.92));
+    border: 1px solid rgba(245, 236, 221, 0.12);
+    border-radius: 24px;
+    padding: clamp(1.6rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow-soft);
+}
+
+.home-hero__kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    color: var(--color-accent-strong);
+    margin-block-end: 0.65rem;
+}
+
+.home-hero__title {
+    font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+    line-height: 1.25;
+    margin-block-end: 0.85rem;
+}
+
+.home-hero__text {
+    color: var(--color-muted);
+    max-inline-size: 70ch;
+}
+
+.featured-project {
+    display: grid;
+    gap: 1rem;
+}
+
+.featured-project__label {
+    color: var(--color-accent-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+}
+
+.featured-project__panel {
+    display: grid;
+    grid-template-columns: minmax(260px, 1.1fr) 1fr;
+    gap: 1.5rem;
+    background: var(--color-card);
+    border: 1px solid rgba(245, 236, 221, 0.08);
+    border-radius: 24px;
+    padding: clamp(1.2rem, 2.6vw, 1.8rem);
+    box-shadow: var(--shadow-soft);
+}
+
+.featured-project__media {
+    inline-size: 100%;
+    block-size: clamp(220px, 36vw, 360px);
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+
+.featured-project__content {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+}
+
+.featured-project__content h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
 .projects__title {
     font-size: clamp(2.5rem, 4vw, 3.2rem);
     color: var(--color-cream);
@@ -120,6 +187,35 @@ h6 {
     letter-spacing: 0.04em;
 }
 
+.project-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: auto;
+}
+
+.project-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(242, 202, 122, 0.35);
+    background: rgba(212, 176, 108, 0.2);
+    color: var(--color-cream);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.project-card__button:hover {
+    text-decoration: none;
+    background: rgba(242, 202, 122, 0.28);
+}
+
+.project-card__button--ghost {
+    background: transparent;
+}
 .projects__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -579,5 +675,9 @@ h6 {
         padding: 0;
         color: var(--color-cream);
         box-shadow: none;
+    }
+
+    .featured-project__panel {
+        grid-template-columns: 1fr;
     }
 }
