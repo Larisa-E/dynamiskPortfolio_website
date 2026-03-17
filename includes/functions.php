@@ -60,6 +60,21 @@ function ensure_project_video_column(PDO $pdo): void
     }
 }
 
+function is_direct_video_url(?string $url): bool
+{
+    $url = trim((string) $url);
+
+    if ($url === '') {
+        return false;
+    }
+
+    if (preg_match('~\.(mp4|webm|ogg)(?:\?.*)?$~i', $url)) {
+        return true;
+    }
+
+    return (bool) preg_match('~^https?://github\.com/user-attachments/assets/[A-Za-z0-9-]+$~i', $url);
+}
+
 function render_project_video(?string $url): ?string
 {
     $url = trim((string) $url);
@@ -81,7 +96,7 @@ function render_project_video(?string $url): ?string
         return '<div class="project-detail__video"><iframe src="' . e($embedUrl) . '" title="Project video" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div>';
     }
 
-    if (preg_match('~\.(mp4|webm|ogg)(?:\?.*)?$~i', $url)) {
+    if (is_direct_video_url($url)) {
         $safe = e($url);
 
         return '<div class="project-detail__video"><video controls preload="metadata"><source src="' . $safe . '"></video></div>';

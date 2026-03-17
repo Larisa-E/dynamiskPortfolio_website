@@ -6,7 +6,7 @@ $baseUrl = rtrim($config['base_url'] ?? '', '/');
 $pageTitle = 'Projects';
 
 try {
-    $stmt = $pdo->query('SELECT id, title, short_description, slug, image, tech FROM projects ORDER BY created_at DESC');
+    $stmt = $pdo->query('SELECT id, title, short_description, slug, image, demo_video_url, tech FROM projects ORDER BY created_at DESC');
     $projects = $stmt->fetchAll();
 } catch (Throwable $e) {
     $projects = [];
@@ -26,13 +26,22 @@ include __DIR__ . '/../includes/header.php';
     <?php else: ?>
         <div class="projects__grid">
             <?php foreach ($projects as $project):
+                $hasCustomImage = !empty($project['image']);
                 $imagePath = $project['image']
                     ? $baseUrl . '/uploads/' . e($project['image'])
                     : $baseUrl . '/assets/images/placeholder.svg';
+                $videoUrl = trim((string) ($project['demo_video_url'] ?? ''));
+                $hasDirectVideo = is_direct_video_url($videoUrl);
             ?>
                 <article class="project-card">
                     <a class="project-card__link" href="<?= $baseUrl ?>/project.php?slug=<?= e($project['slug']) ?>">
-                        <img class="project-card__image" src="<?= $imagePath ?>" alt="<?= e($project['title']) ?>">
+                        <?php if ($hasDirectVideo): ?>
+                            <video class="project-card__image" autoplay muted loop playsinline preload="metadata" <?= $hasCustomImage ? 'poster="' . $imagePath . '"' : '' ?> aria-label="<?= e($project['title']) ?> demo preview">
+                                <source src="<?= e($videoUrl) ?>">
+                            </video>
+                        <?php else: ?>
+                            <img class="project-card__image" src="<?= $imagePath ?>" alt="<?= e($project['title']) ?>">
+                        <?php endif; ?>
                         <h2 class="project-card__title"><?= e($project['title']) ?></h2>
                     </a>
                     <?php if (!empty($project['tech'])): ?>

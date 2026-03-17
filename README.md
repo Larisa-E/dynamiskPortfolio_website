@@ -1,5 +1,7 @@
 # Dynamisk Portfolio Website
 
+See also: [Static version guide](README.static.md).
+
 I built this project to have a living, visual résumé that I can update without editing raw PHP every time. It lets me showcase recent work, tweak my story, and read messages in one place—everything runs on a simple PHP/MySQL stack that I can host almost anywhere.
 
 ![Public site walkthrough](public/assets/gifs/home.gif "Landing page scroll through projects")
@@ -72,20 +74,3 @@ Here is a quick peek at the tables I designed.
 ![Database tables overview](public/assets/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
 
 Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
-
-## Static contact form (GitHub Pages)
-You edit in dynamic folders, but your live site is the generated content inside `docs`.
-
-When running the static `/docs` site on GitHub Pages, the contact form is configured for FormSubmit.
-
-1. In `scripts/export_static.php`, set `$portfolioEmail` to your email address.
-2. The generator builds this action automatically:
-   - `https://formsubmit.co/your@email.com`
-3. On first submission, FormSubmit sends a verification email to activate delivery.
-4. Regenerate static files:
-   ```bash
-   php scripts/export_static.php
-   ```
-5. Commit and push `docs/contact.html` and `scripts/export_static.php`.
-
-This avoids browser warnings from `mailto:` forms and gives you proper form delivery.
