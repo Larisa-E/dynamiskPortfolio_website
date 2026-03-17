@@ -74,6 +74,8 @@ Here is a quick peek at the tables I designed.
 Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
 
 ## Static contact form (GitHub Pages)
+You edit in dynamic folders, but your live site is the generated content inside `docs`.
+
 When running the static `/docs` site on GitHub Pages, the contact form is configured for FormSubmit.
 
 1. In `scripts/export_static.php`, set `$portfolioEmail` to your email address.
