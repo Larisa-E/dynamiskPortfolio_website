@@ -436,7 +436,6 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $a
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
-    . '    <p class="contact__direct">You can also email me directly at <a href="mailto:' . e($portfolioEmail) . '">' . e($portfolioEmail) . '</a>.</p>\n'
     . '    <form action="https://formsubmit.co/' . e($portfolioEmail) . '" method="POST" class="contact__form">\n'
     . '        <input type="hidden" name="_subject" value="New portfolio contact message">\n'
     . '        <input type="hidden" name="_captcha" value="false">\n'
