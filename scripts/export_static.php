@@ -428,7 +428,6 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $a
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
-    . '    <p class="contact__success">This static site does not save messages in a database. Use email below.</p>\n'
     . '    <form action="mailto:63336@edu.sde.dk" method="post" enctype="text/plain" class="contact__form">\n'
     . '        <label>Name<input type="text" name="name" required></label>\n'
     . '        <label>Email<input type="email" name="email" required></label>\n'
