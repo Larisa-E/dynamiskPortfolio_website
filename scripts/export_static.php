@@ -359,6 +359,7 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'index.html', shell_page('Projects',
 
 // about.html
 $aboutBody = '<section class="about">\n';
+$portfolioEmail = 'larisaeb0289@gmail.com';
 
 if ($about) {
     if (!empty($about['profile_image'])) {
@@ -406,8 +407,11 @@ if ($about) {
 
     $github = trim((string) ($about['github_url'] ?? ''));
     $linkedin = trim((string) ($about['linkedin_url'] ?? ''));
-    if ($github !== '' || $linkedin !== '') {
+    if ($github !== '' || $linkedin !== '' || $portfolioEmail !== '') {
         $aboutBody .= '    <div class="about__social" aria-label="Find Larisa online">\n';
+        if ($portfolioEmail !== '') {
+            $aboutBody .= '        <a class="about__social-link" href="mailto:' . e($portfolioEmail) . '">Email</a>\n';
+        }
         if ($github !== '') {
             $aboutBody .= '        <a class="about__social-link" href="' . e($github) . '" target="_blank" rel="noopener">GitHub</a>\n';
         }
@@ -432,8 +436,11 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $a
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
-    . '    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form">\n'
+    . '    <p class="contact__direct">You can also email me directly at <a href="mailto:' . e($portfolioEmail) . '">' . e($portfolioEmail) . '</a>.</p>\n'
+    . '    <form action="https://formsubmit.co/' . e($portfolioEmail) . '" method="POST" class="contact__form">\n'
     . '        <input type="hidden" name="_subject" value="New portfolio contact message">\n'
+    . '        <input type="hidden" name="_captcha" value="false">\n'
+    . '        <input type="hidden" name="_template" value="table">\n'
     . '        <label>Name<input type="text" name="name" required></label>\n'
     . '        <label>Email<input type="email" name="email" required></label>\n'
     . '        <label>Message<textarea name="message" rows="5" required></textarea></label>\n'

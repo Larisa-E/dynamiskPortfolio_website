@@ -74,14 +74,12 @@ Here is a quick peek at the tables I designed.
 Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
 
 ## Static contact form (GitHub Pages)
-When running the static `/docs` site on GitHub Pages, the contact form is configured for Formspree.
+When running the static `/docs` site on GitHub Pages, the contact form is configured for FormSubmit.
 
-1. Create a form at `https://formspree.io/`.
-2. Copy your form endpoint ID (looks like `f/xxxxabcd`).
-3. In `scripts/export_static.php`, replace:
-   - `https://formspree.io/f/YOUR_FORM_ID`
-   with your real endpoint, for example:
-   - `https://formspree.io/f/xxxxabcd`
+1. In `scripts/export_static.php`, set `$portfolioEmail` to your email address.
+2. The generator builds this action automatically:
+   - `https://formsubmit.co/your@email.com`
+3. On first submission, FormSubmit sends a verification email to activate delivery.
 4. Regenerate static files:
    ```bash
    php scripts/export_static.php

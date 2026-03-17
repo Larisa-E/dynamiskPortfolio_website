@@ -20,8 +20,11 @@
 <main class="site-main">
 <section class="contact">
     <h1>Contact</h1>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form">
+    <p class="contact__direct">You can also email me directly at <a href="mailto:larisaeb0289@gmail.com">larisaeb0289@gmail.com</a>.</p>
+    <form action="https://formsubmit.co/larisaeb0289@gmail.com" method="POST" class="contact__form">
         <input type="hidden" name="_subject" value="New portfolio contact message">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <label>Name<input type="text" name="name" required></label>
         <label>Email<input type="email" name="email" required></label>
         <label>Message<textarea name="message" rows="5" required></textarea></label>

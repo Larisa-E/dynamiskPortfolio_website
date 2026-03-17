@@ -653,6 +653,17 @@ h6 {
     line-height: 1.2;
 }
 
+.contact__direct {
+    color: #e8eef4;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.contact__direct a {
+    color: var(--color-accent-strong);
+    font-weight: 600;
+}
+
 .contact__form {
     background: rgba(7, 15, 22, 0.62);
     border: 1px solid rgba(166, 206, 229, 0.12);
