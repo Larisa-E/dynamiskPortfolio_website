@@ -261,7 +261,6 @@ function write_html(string $path, string $content): void
 }
 
 $projects = $pdo->query('SELECT id, title, slug, short_description, description, image, demo_video_url, url, tech FROM projects ORDER BY created_at DESC')->fetchAll();
-$featuredProject = $projects[0] ?? null;
 $skillsByGroup = build_skill_groups($projects);
 
 $aboutStmt = $pdo->prepare('SELECT title, intro, body, signature, profile_image, github_url, linkedin_url FROM about_profiles WHERE id = :id LIMIT 1');
@@ -302,53 +301,6 @@ foreach ($skillsByGroup as $groupName => $skills) {
 
 $indexBody .= '    </div>\n'
     . '</section>\n';
-
-if ($featuredProject) {
-    $fSlug = $featuredProject['slug'];
-    $fTitle = $featuredProject['title'];
-    $fTech = trim((string) ($featuredProject['tech'] ?? ''));
-    $fShort = trim((string) ($featuredProject['short_description'] ?? ''));
-    $fVideo = trim((string) ($featuredProject['demo_video_url'] ?? ''));
-    $fRepo = trim((string) ($featuredProject['url'] ?? ''));
-    $fImg = !empty($featuredProject['image'])
-        ? './uploads/' . rawurlencode($featuredProject['image'])
-        : './assets/images/placeholder.svg';
-
-    if (is_direct_video_url($fVideo)) {
-        $fSrc = normalize_media_url($fVideo, 0);
-        $fPoster = !empty($featuredProject['image']) ? ' poster="' . e($fImg) . '"' : '';
-        $featuredMedia = '<video class="featured-project__media" autoplay muted loop playsinline preload="metadata"' . $fPoster . ' aria-label="' . e($fTitle) . ' preview"><source src="' . e($fSrc) . '"></video>';
-    } else {
-        $featuredMedia = '<img class="featured-project__media" src="' . e($fImg) . '" alt="' . e($fTitle) . '">';
-    }
-
-    $indexBody .= '<section class="featured-project">\n'
-        . '    <p class="featured-project__label">Featured Project</p>\n'
-        . '    <div class="featured-project__panel">\n'
-        . '        <a class="featured-project__link" href="./projects/' . rawurlencode($fSlug) . '/">' . $featuredMedia . '</a>\n'
-        . '        <div class="featured-project__content">\n'
-        . '            <h2><a href="./projects/' . rawurlencode($fSlug) . '/">' . e($fTitle) . '</a></h2>\n';
-
-    if ($fTech !== '') {
-        $indexBody .= '            <p class="project-card__tech">Tech: ' . e($fTech) . '</p>\n';
-    }
-
-    if ($fShort !== '') {
-        $indexBody .= '            <p class="project-card__summary">' . e($fShort) . '</p>\n';
-    }
-
-    $indexBody .= '            <div class="project-card__actions">\n'
-        . '                <a class="project-card__button" href="./projects/' . rawurlencode($fSlug) . '/">View details</a>\n';
-
-    if ($fRepo !== '') {
-        $indexBody .= '                <a class="project-card__button project-card__button--ghost" href="' . e($fRepo) . '" target="_blank" rel="noopener">GitHub</a>\n';
-    }
-
-    $indexBody .= '            </div>\n'
-        . '        </div>\n'
-        . '    </div>\n'
-        . '</section>\n';
-}
 
 $indexBody .= '<section class="projects">\n'
     . '    <h2 class="projects__title">Latest Projects</h2>\n'
