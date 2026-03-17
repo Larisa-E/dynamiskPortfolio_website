@@ -940,7 +940,8 @@ h6 {
         grid-column: 1;
         grid-row: 1;
         justify-self: start;
-        position: static;
+        position: sticky;
+        top: 110px;
     }
 
     .about__sidebar {
@@ -957,9 +958,9 @@ h6 {
     }
 
     .about__content {
-        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        grid-template-columns: 1fr;
         align-items: start;
-        column-gap: 1.15rem;
+        row-gap: 0.9rem;
     }
 }
 
