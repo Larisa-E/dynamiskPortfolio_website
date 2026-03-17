@@ -425,17 +425,17 @@ h6 {
 
 .about,
 .project-detail,
-.contact__form,
+.contact,
 .admin-dashboard,
 .admin-projects,
 .admin-form,
 .admin-login,
 .admin-messages {
-    background: var(--color-surface);
-    border-radius: 26px;
+    background: linear-gradient(145deg, rgba(7, 20, 28, 0.78), rgba(8, 17, 24, 0.72));
+    border-radius: 22px;
     padding: clamp(2.25rem, 4vw, 3.25rem);
-    border: 1px solid rgba(245, 236, 221, 0.1);
-    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(183, 218, 237, 0.16);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
 }
 
 .about {
@@ -552,6 +552,47 @@ h6 {
     gap: 1.75rem;
 }
 
+.project-detail__header h1 {
+    line-height: 1.2;
+}
+
+.project-detail__content {
+    color: var(--color-muted);
+    line-height: 1.85;
+}
+
+.project-detail__link a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(14, 30, 40, 0.66);
+    border: 1px solid rgba(166, 206, 229, 0.2);
+    text-decoration: none;
+}
+
+.project-detail__link a:hover {
+    text-decoration: none;
+    background: rgba(30, 58, 74, 0.82);
+}
+
+.contact {
+    max-inline-size: 860px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.15rem;
+}
+
+.contact h1 {
+    line-height: 1.2;
+}
+
+.contact__form {
+    background: rgba(7, 15, 22, 0.62);
+    border: 1px solid rgba(166, 206, 229, 0.16);
+    border-radius: 16px;
+}
+
 .project-detail__video {
     border-radius: 22px;
     overflow: hidden;
@@ -655,9 +696,9 @@ h6 {
 
 .contact__success,
 .admin-form__success {
-    background: rgba(86, 153, 116, 0.14);
-    border: 1px solid rgba(134, 208, 168, 0.4);
-    color: #c0f5d6;
+    background: rgba(13, 30, 40, 0.62);
+    border: 1px solid rgba(166, 206, 229, 0.16);
+    color: #d6ecfb;
     border-radius: 16px;
     padding: 1rem 1.25rem;
 }
