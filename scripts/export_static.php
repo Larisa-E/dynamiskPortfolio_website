@@ -376,27 +376,19 @@ if ($about) {
     $aboutBody .= '    <div class="about__body">\n'
         . '        <p>I am a Data Technician student specialized in Programming at Syddansk Erhvervsskole, currently focused on building complete solutions from interface to database.</p>\n'
         . '        <p>My project work spans PHP, JavaScript, SQL, C#, and .NET MAUI, and I enjoy debugging, improving architecture, and turning ideas into maintainable products.</p>\n'
-        . '    </div>\n'
-        . '    <section class="about__panel">\n'
-        . '        <h2>What I Bring</h2>\n'
+        . '        <h2 class="about__subheading">What I Bring</h2>\n'
         . '        <ul class="about__list">\n'
         . '            <li>Full-stack mindset across UI, backend logic, and relational data modeling</li>\n'
         . '            <li>Hands-on project delivery with authentication, APIs, and SQL workflows</li>\n'
         . '            <li>Learning-oriented approach with focus on quality, structure, and team contribution</li>\n'
         . '        </ul>\n'
-        . '    </section>\n'
-        . '    <section class="about__panel">\n'
-        . '        <h2>Education</h2>\n'
+        . '        <h2 class="about__subheading">Education</h2>\n'
         . '        <p>Data Technician with specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</p>\n'
-        . '    </section>\n'
-        . '    <section class="about__panel">\n'
-        . '        <h2>Looking For</h2>\n'
+        . '        <h2 class="about__subheading">Looking For</h2>\n'
         . '        <p>Student or junior full-stack opportunities where I can contribute to web product development, backend services, and data-driven features while growing in CI/CD and cloud practices.</p>\n'
-        . '    </section>\n'
-        . '    <section class="about__panel">\n'
-        . '        <h2>Languages</h2>\n'
+        . '        <h2 class="about__subheading">Languages</h2>\n'
         . '        <p>Romanian (native), English (fluent), Danish (improving in written and spoken communication).</p>\n'
-        . '    </section>\n';
+        . '    </div>\n';
 
     $aboutBody .= '    <footer class="about__footer">Open to student and junior opportunities in software development, cloud, and data-focused roles.</footer>\n';
 

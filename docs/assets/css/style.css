@@ -453,6 +453,12 @@ h6 {
     line-height: 1.85;
 }
 
+.about__subheading {
+    font-size: 1.95rem;
+    line-height: 1.2;
+    margin-top: 0.8rem;
+}
+
 .about__body p {
     display: block;
     background: none;
@@ -467,32 +473,6 @@ h6 {
     padding-block-start: 1rem;
     color: var(--color-cream);
     font-weight: 600;
-}
-
-.about__panel {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0.2rem 0;
-    display: grid;
-    gap: 0.45rem;
-}
-
-.about__panel h2 {
-    font-size: 1.2rem;
-    display: block;
-    background: none;
-    border-radius: 0;
-    padding: 0;
-}
-
-.about__panel p {
-    color: #e8eef4;
-    display: block;
-    background: none;
-    border-radius: 0;
-    padding: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .about__list {
@@ -879,14 +859,6 @@ h6 {
     .about__footer,
     .about__social {
         grid-column: 2 / 4;
-    }
-
-    .about__panel:first-of-type {
-        grid-column: 2 / 4;
-    }
-
-    .about__panel:not(:first-of-type) {
-        grid-column: span 1;
     }
 }
 
