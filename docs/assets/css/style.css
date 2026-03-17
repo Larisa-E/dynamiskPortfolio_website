@@ -147,12 +147,12 @@ h6 {
 }
 
 .skills-board {
-    background: rgba(6, 14, 20, 0.5);
+    background: transparent;
     border: none;
-    border-radius: var(--radius-panel);
-    padding: clamp(1.2rem, 3vw, 1.8rem);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(4px);
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
     display: grid;
     gap: 1.1rem;
 }
@@ -168,10 +168,10 @@ h6 {
 }
 
 .skills-column {
-    background: rgba(7, 15, 22, 0.36);
+    background: transparent;
     border: none;
-    border-radius: 12px;
-    padding: 0.65rem;
+    border-radius: 0;
+    padding: 0.25rem;
     display: grid;
     align-content: start;
     gap: 0.45rem;
@@ -389,7 +389,6 @@ h6 {
 
 .about,
 .project-detail,
-.contact,
 .admin-dashboard,
 .admin-projects,
 .admin-form,
@@ -407,10 +406,12 @@ h6 {
     margin: 0 auto;
     display: grid;
     gap: 1.25rem;
-    background: linear-gradient(145deg, rgba(7, 20, 28, 0.78), rgba(8, 17, 24, 0.72));
-    border: 1px solid rgba(183, 218, 237, 0.16);
-    border-radius: 22px;
-    backdrop-filter: blur(8px);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    padding: 0;
+    box-shadow: none;
 }
 
 .about__media {
@@ -459,10 +460,10 @@ h6 {
 }
 
 .about__panel {
-    background: rgba(7, 15, 22, 0.62);
-    border: 1px solid rgba(166, 206, 229, 0.16);
-    border-radius: 16px;
-    padding: 0.95rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0.2rem 0;
     display: grid;
     gap: 0.45rem;
 }
@@ -541,10 +542,15 @@ h6 {
 }
 
 .contact {
-    max-inline-size: 860px;
+    max-inline-size: 1040px;
     margin: 0 auto;
     display: grid;
     gap: 1.15rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
 }
 
 .contact h1 {
@@ -552,9 +558,21 @@ h6 {
 }
 
 .contact__form {
-    background: rgba(7, 15, 22, 0.62);
-    border: 1px solid rgba(166, 206, 229, 0.16);
+    background: rgba(7, 15, 22, 0.48);
+    border: 1px solid rgba(166, 206, 229, 0.12);
     border-radius: 16px;
+    padding: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 1rem;
+}
+
+.contact__form label:last-of-type {
+    grid-column: 1 / -1;
+}
+
+.contact__form button {
+    grid-column: 1 / -1;
 }
 
 .project-detail__video {
@@ -866,6 +884,10 @@ h6 {
         padding: 0;
         color: var(--color-cream);
         box-shadow: none;
+    }
+
+    .contact__form {
+        grid-template-columns: 1fr;
     }
 
 }
