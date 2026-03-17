@@ -340,7 +340,7 @@ function shell_page(string $title, string $body, int $depth, string $active, str
         . '            <li><a href="' . e($home) . '"' . $projectsClass . '>Projects</a></li>\n'
         . '            <li><a href="' . e($about) . '"' . $aboutClass . '>About</a></li>\n'
         . '            <li><a href="' . e($contact) . '"' . $contactClass . '>Contact</a></li>\n'
-        . '            <li><a href="' . e($cv) . '"' . $cvClass . '>Download CV</a></li>\n'
+        . '            <li><a href="' . e($cv) . '"' . $cvClass . '>CV</a></li>\n'
         . '        </ul>\n'
         . '    </nav>\n'
         . '</header>\n'
@@ -375,7 +375,7 @@ $indexBody = '<section class="home-hero">\n'
     . '    <div class="home-hero__actions">\n'
     . '        <a class="project-card__button" href="./contact.html">Contact me</a>\n'
     . '        <a class="project-card__button project-card__button--ghost" href="./about.html">Read my profile</a>\n'
-    . '        <a class="project-card__button project-card__button--ghost" href="./cv.html">Download CV</a>\n'
+    . '        <a class="project-card__button project-card__button--ghost" href="./cv.html">Open CV</a>\n'
     . '    </div>\n'
     . '</section>\n';
 
@@ -545,7 +545,7 @@ if ($about) {
         $aboutBody .= '    <div class="about__social" aria-label="Find Larisa online">\n';
         if ($portfolioEmail !== '') {
             $aboutBody .= '        <a class="about__social-link" href="mailto:' . e($portfolioEmail) . '">Email</a>\n';
-            $aboutBody .= '        <a class="about__social-link" href="./cv.html">Download CV</a>\n';
+            $aboutBody .= '        <a class="about__social-link" href="./cv.html">CV</a>\n';
         }
         if ($github !== '') {
             $aboutBody .= '        <a class="about__social-link" href="' . e($github) . '" target="_blank" rel="noopener">GitHub</a>\n';
@@ -600,29 +600,26 @@ $contactBody = '<section class="contact">\n'
 write_html($docsDir . DIRECTORY_SEPARATOR . 'contact.html', shell_page('Contact', $contactBody, 0, 'contact', 'Contact Larisa for student and junior full-stack opportunities and collaboration.', 'contact.html'));
 
 // cv.html
+$cvPdfHref = './Larisa%20Elena%20Bucos_CV%20Resume.pdf';
 $cvBody = '<section class="cv">\n'
     . '    <header class="cv__header">\n'
     . '        <h1>Curriculum Vitae</h1>\n'
     . '        <p>Larisa Elena Bucos - Aspiring Full-Stack Developer</p>\n'
+    . '        <p class="cv__summary">Quick recruiter version: backend and data-focused full-stack profile with hands-on delivery across PHP, SQL, C#, and .NET MAUI.</p>\n'
     . '    </header>\n'
-    . '    <div class="cv__grid">\n'
-    . '        <article class="cv__panel">\n'
-    . '            <h2>Profile</h2>\n'
-    . '            <p>Data Technician student specialized in Programming at Syddansk Erhvervsskole, building practical full-stack solutions with strong backend and database foundations.</p>\n'
-    . '        </article>\n'
-    . '        <article class="cv__panel">\n'
-    . '            <h2>Core Stack</h2>\n'
-    . '            <p>PHP, JavaScript, SQL Server, Oracle SQL, MySQL, C#, .NET MAUI, APIs, LDAP/LDAPS.</p>\n'
-    . '        </article>\n'
-    . '        <article class="cv__panel">\n'
-    . '            <h2>Education</h2>\n'
-    . '            <p>Data Technician with specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</p>\n'
-    . '        </article>\n'
-    . '        <article class="cv__panel">\n'
-    . '            <h2>Links</h2>\n'
-    . '            <p><a href="mailto:' . e($portfolioEmail) . '">Email</a> | <a href="https://github.com/Larisa-E" target="_blank" rel="noopener">GitHub</a> | <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>\n'
-    . '        </article>\n'
+    . '    <div class="cv__actions">\n'
+    . '        <a class="project-card__button" href="' . e($cvPdfHref) . '" target="_blank" rel="noopener" download>Download PDF CV</a>\n'
+    . '        <a class="project-card__button project-card__button--ghost" href="' . e($cvPdfHref) . '" target="_blank" rel="noopener">Open PDF in browser</a>\n'
     . '    </div>\n'
+    . '    <article class="cv__panel">\n'
+    . '        <h2>Snapshot</h2>\n'
+    . '        <ul class="cv__highlights">\n'
+    . '            <li>Builds practical web products with strong backend and relational database structure.</li>\n'
+    . '            <li>Experience across PHP, JavaScript, SQL Server, Oracle SQL, MySQL, C#, and .NET MAUI.</li>\n'
+    . '            <li>Data Technician specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</li>\n'
+    . '        </ul>\n'
+    . '        <p class="cv__links"><a href="mailto:' . e($portfolioEmail) . '">Email</a> | <a href="https://github.com/Larisa-E" target="_blank" rel="noopener">GitHub</a> | <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>\n'
+    . '    </article>\n'
     . '</section>\n';
 write_html($docsDir . DIRECTORY_SEPARATOR . 'cv.html', shell_page('CV', $cvBody, 0, 'cv', 'CV and professional summary for Larisa Elena Bucos.', 'cv.html'));
 

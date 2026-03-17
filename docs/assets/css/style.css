@@ -894,6 +894,17 @@ h6 {
     gap: 0.45rem;
 }
 
+.cv__summary {
+    color: var(--color-muted);
+    max-inline-size: 68ch;
+}
+
+.cv__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
 .cv__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -907,6 +918,18 @@ h6 {
     padding: 0.95rem 1rem;
     display: grid;
     gap: 0.4rem;
+}
+
+.cv__highlights {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+    color: var(--color-muted);
+}
+
+.cv__links {
+    margin-top: 0.4rem;
 }
 
 .contact__errors,
