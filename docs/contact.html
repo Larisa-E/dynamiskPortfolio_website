@@ -36,6 +36,11 @@
             var nextInput = document.getElementById("contact-next");
             if (!nextInput) return;
             nextInput.value = window.location.origin + window.location.pathname + "#sent";
+            if (window.location.hash === "#sent") {
+                window.setTimeout(function () {
+                    history.replaceState(null, "", window.location.pathname);
+                }, 5000);
+            }
         })();
     </script>
 </section>

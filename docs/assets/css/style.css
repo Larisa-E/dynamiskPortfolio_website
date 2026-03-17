@@ -475,6 +475,7 @@ h6 {
 .about__content {
     display: grid;
     gap: 1rem;
+    grid-template-columns: 1fr;
 }
 
 .about__narrative {
@@ -958,12 +959,6 @@ h6 {
         top: 110px;
     }
 
-    .about__sidebar {
-        grid-column: 2;
-        grid-row: 2;
-        align-self: start;
-    }
-
     .about__header,
     .about__content,
     .about__footer,
@@ -972,9 +967,26 @@ h6 {
     }
 
     .about__content {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1.35fr) minmax(240px, 1fr);
         align-items: start;
-        row-gap: 0.9rem;
+        column-gap: 1rem;
+        row-gap: 0.85rem;
+    }
+
+    .about__narrative {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .about__sidebar {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: start;
+    }
+
+    .about__focus {
+        grid-column: 1;
+        grid-row: 2;
     }
 }
 
