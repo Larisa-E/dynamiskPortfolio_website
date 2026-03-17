@@ -24,14 +24,12 @@ body {
     font-family: "Source Sans 3", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.8;
     background-color: #050809;
-    background-image: radial-gradient(circle at 20% 10%, rgba(38, 60, 62, 0.18), rgba(6, 10, 12, 0) 55%),
-        radial-gradient(circle at 80% -5%, rgba(30, 48, 50, 0.16), rgba(6, 10, 12, 0) 52%),
-        linear-gradient(180deg, rgba(8, 14, 15, 0.88) 0%, rgba(3, 5, 6, 0.95) 58%, rgba(2, 3, 4, 1) 100%),
-        repeating-linear-gradient(135deg, rgba(240, 233, 220, 0.02) 0 1px, transparent 1px 4px);
-    background-size: 160% 160%, 160% 160%, 100% 100%, 200px 200px;
-    background-position: 0 0, 100% 0, center, 0 0;
-    background-attachment: scroll;
-    background-blend-mode: screen, screen, normal, overlay;
+    background-image: linear-gradient(180deg, rgba(3, 7, 10, 0.78) 0%, rgba(4, 8, 10, 0.8) 55%, rgba(3, 6, 9, 0.86) 100%),
+        url("../../images/bg.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--color-cream);
     min-block-size: 100vh;
 }
@@ -114,7 +112,7 @@ h6 {
 }
 
 .home-hero {
-    background: linear-gradient(140deg, rgba(19, 42, 42, 0.92), rgba(12, 24, 27, 0.92));
+    background: rgba(8, 16, 22, 0.72);
     border: none;
     border-radius: 24px;
     padding: clamp(1.6rem, 4vw, 2.5rem);
@@ -148,10 +146,7 @@ h6 {
 }
 
 .skills-board {
-    background-image: linear-gradient(160deg, rgba(4, 8, 12, 0.58), rgba(7, 12, 18, 0.55)), url("../../images/bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: rgba(6, 14, 20, 0.6);
     border: none;
     border-radius: 14px;
     padding: clamp(1.2rem, 3vw, 1.8rem);
@@ -293,7 +288,7 @@ h6 {
     display: grid;
     grid-template-columns: minmax(260px, 1.1fr) 1fr;
     gap: 1.5rem;
-    background: var(--color-card);
+    background: rgba(8, 16, 22, 0.72);
     border: none;
     border-radius: 24px;
     padding: clamp(1.2rem, 2.6vw, 1.8rem);
@@ -361,7 +356,7 @@ h6 {
 
 .project-card {
     position: relative;
-    background: var(--color-card);
+    background: rgba(8, 16, 22, 0.72);
     border-radius: 24px;
     overflow: hidden;
     display: flex;
@@ -819,6 +814,10 @@ h6 {
 }
 
 @media (max-width: 640px) {
+    body {
+        background-attachment: scroll;
+    }
+
     .nav {
         flex-direction: column;
         align-items: flex-start;
