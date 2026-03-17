@@ -439,12 +439,12 @@ h6 {
 }
 
 .about__intro {
-    color: #f3cf87;
+    color: #ffd98f;
     font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1.75;
     display: inline;
-    background: rgba(7, 14, 20, 0.28);
+    background: rgba(6, 12, 18, 0.48);
     border-radius: 10px;
     padding: 0.1rem 0.45rem;
 }
@@ -458,9 +458,10 @@ h6 {
 
 .about__body p {
     display: inline;
-    background: rgba(7, 14, 20, 0.24);
+    background: rgba(6, 12, 18, 0.44);
     border-radius: 10px;
     padding: 0.15rem 0.5rem;
+    color: #e8eef4;
 }
 
 .about__footer {
@@ -482,15 +483,15 @@ h6 {
 .about__panel h2 {
     font-size: 1.2rem;
     display: inline-block;
-    background: rgba(7, 14, 20, 0.3);
+    background: rgba(6, 12, 18, 0.5);
     border-radius: 10px;
     padding: 0.08rem 0.5rem;
 }
 
 .about__panel p {
-    color: var(--color-muted);
+    color: #e8eef4;
     display: inline;
-    background: rgba(7, 14, 20, 0.24);
+    background: rgba(6, 12, 18, 0.44);
     border-radius: 10px;
     padding: 0.15rem 0.5rem;
 }
@@ -504,9 +505,10 @@ h6 {
 
 .about__list li {
     display: inline;
-    background: rgba(7, 14, 20, 0.24);
+    background: rgba(6, 12, 18, 0.44);
     border-radius: 10px;
     padding: 0.12rem 0.45rem;
+    color: #e8eef4;
 }
 
 .about__social {
@@ -584,7 +586,7 @@ h6 {
 }
 
 .contact__form {
-    background: rgba(7, 15, 22, 0.48);
+    background: rgba(7, 15, 22, 0.62);
     border: 1px solid rgba(166, 206, 229, 0.12);
     border-radius: 16px;
     padding: 1.1rem;
