@@ -72,3 +72,20 @@ Here is a quick peek at the tables I designed.
 ![Database tables overview](public/assets/gifs/db.gif "projects, admins, messages tables in phpMyAdmin")
 
 Thanks for checking out my portfolio build! If you see improvements or want to collaborate, feel free to open an issue or reach out.
+
+## Static contact form (GitHub Pages)
+When running the static `/docs` site on GitHub Pages, the contact form is configured for Formspree.
+
+1. Create a form at `https://formspree.io/`.
+2. Copy your form endpoint ID (looks like `f/xxxxabcd`).
+3. In `scripts/export_static.php`, replace:
+   - `https://formspree.io/f/YOUR_FORM_ID`
+   with your real endpoint, for example:
+   - `https://formspree.io/f/xxxxabcd`
+4. Regenerate static files:
+   ```bash
+   php scripts/export_static.php
+   ```
+5. Commit and push `docs/contact.html` and `scripts/export_static.php`.
+
+This avoids browser warnings from `mailto:` forms and gives you proper form delivery.

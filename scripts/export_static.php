@@ -428,7 +428,8 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $a
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
-    . '    <form action="mailto:63336@edu.sde.dk" method="post" enctype="text/plain" class="contact__form">\n'
+    . '    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form">\n'
+    . '        <input type="hidden" name="_subject" value="New portfolio contact message">\n'
     . '        <label>Name<input type="text" name="name" required></label>\n'
     . '        <label>Email<input type="email" name="email" required></label>\n'
     . '        <label>Message<textarea name="message" rows="5" required></textarea></label>\n'
