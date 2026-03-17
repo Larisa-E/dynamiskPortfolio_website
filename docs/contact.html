@@ -20,15 +20,24 @@
 <main class="site-main">
 <section class="contact">
     <h1>Contact</h1>
+    <p id="sent" class="contact__sent">Thank you. Your message has been sent successfully.</p>
     <form action="https://formsubmit.co/larisaeb0289@gmail.com" method="POST" class="contact__form">
         <input type="hidden" name="_subject" value="New portfolio contact message">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="contact-next" value="">
         <label>Name<input type="text" name="name" required></label>
         <label>Email<input type="email" name="email" required></label>
         <label>Message<textarea name="message" rows="5" required></textarea></label>
         <button type="submit">Send message</button>
     </form>
+    <script>
+        (function () {
+            var nextInput = document.getElementById("contact-next");
+            if (!nextInput) return;
+            nextInput.value = window.location.origin + window.location.pathname + "#sent";
+        })();
+    </script>
 </section>
 </main>
 <footer class="site-footer">

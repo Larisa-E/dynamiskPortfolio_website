@@ -436,15 +436,24 @@ write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $a
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
+    . '    <p id="sent" class="contact__sent">Thank you. Your message has been sent successfully.</p>\n'
     . '    <form action="https://formsubmit.co/' . e($portfolioEmail) . '" method="POST" class="contact__form">\n'
     . '        <input type="hidden" name="_subject" value="New portfolio contact message">\n'
     . '        <input type="hidden" name="_captcha" value="false">\n'
     . '        <input type="hidden" name="_template" value="table">\n'
+    . '        <input type="hidden" name="_next" id="contact-next" value="">\n'
     . '        <label>Name<input type="text" name="name" required></label>\n'
     . '        <label>Email<input type="email" name="email" required></label>\n'
     . '        <label>Message<textarea name="message" rows="5" required></textarea></label>\n'
     . '        <button type="submit">Send message</button>\n'
     . '    </form>\n'
+    . '    <script>\n'
+    . '        (function () {\n'
+    . '            var nextInput = document.getElementById("contact-next");\n'
+    . '            if (!nextInput) return;\n'
+    . '            nextInput.value = window.location.origin + window.location.pathname + "#sent";\n'
+    . '        })();\n'
+    . '    </script>\n'
     . '</section>\n';
 write_html($docsDir . DIRECTORY_SEPARATOR . 'contact.html', shell_page('Contact', $contactBody, 0, 'contact'));
 
