@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KaosTek | Larisa Portfolio</title>
+    <meta name="description" content="KaosTek is a server-rendered PHP application for managing and viewing customers, products, orders, and order details in one dashboard.">
+    <link rel="canonical" href="https://larisa-e.github.io/dynamiskPortfolio_website/projects/kaostek/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="KaosTek | Larisa Portfolio">
+    <meta property="og:description" content="KaosTek is a server-rendered PHP application for managing and viewing customers, products, orders, and order details in one dashboard.">
+    <meta property="og:url" content="https://larisa-e.github.io/dynamiskPortfolio_website/projects/kaostek/index.html">
+    <meta property="og:image" content="https://larisa-e.github.io/dynamiskPortfolio_website/uploads/kaostek.gif">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" as="image" href="../../uploads/kaostek.gif">
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
@@ -14,6 +23,7 @@
             <li><a href="../../index.html" class="is-active">Projects</a></li>
             <li><a href="../../about.html">About</a></li>
             <li><a href="../../contact.html">Contact</a></li>
+            <li><a href="../../cv.html" class="nav__cta">Download CV</a></li>
         </ul>
     </nav>
 </header>
@@ -22,9 +32,20 @@
     <header class="project-detail__header">
         <h1>KaosTek</h1>
         <p class="project-detail__tech">Tech stack: PHP, MySQL, MariaDB, Bootstrap 5, HTML, Sessions, mysqli</p>
+        <div class="project-detail__actions">
+            <a class="project-card__button" href="https://github.com/Larisa-E/KaosTek" target="_blank" rel="noopener">GitHub repository</a>
+        </div>
     </header>
+    <section class="project-detail__highlights">
+        <h2>Highlights</h2>
+        <ul>
+            <li>Architecture: Built with PHP, MySQL, MariaDB, Bootstrap 5, HTML, Sessions, mysqli and structured for readability and future extension.</li>
+            <li>Challenge: Modeled relational data carefully to preserve integrity and support realistic reporting/query scenarios.</li>
+            <li>Learning: Strengthened architecture decisions and debugging discipline while turning complex requirements into maintainable output.</li>
+        </ul>
+    </section>
     <a class="project-detail__image-link" href="../../uploads/kaostek.gif" target="_blank" rel="noopener">
-        <img class="project-detail__image" src="../../uploads/kaostek.gif" alt="KaosTek">
+        <img class="project-detail__image" src="../../uploads/kaostek.gif" alt="Preview image for KaosTek" loading="lazy" decoding="async">
     </a>
     <p class="project-detail__link"><a href="https://github.com/Larisa-E/KaosTek" target="_blank" rel="noopener">View project</a></p>
     <div class="project-detail__content">KaosTek is a server-rendered PHP application for managing and viewing customers, products, orders, and order details in one dashboard. I implemented session-based authentication, password hashing and verification, and protected routes to keep access controlled. The database layer is normalized and complemented by read-optimized views, including order detail and customer order summary reporting, so the UI can present business data clearly without complex page logic. The project emphasizes practical full-stack fundamentals: clean structure (public vs src), reusable DB connection logic, simple health diagnostics, and a fast local development workflow.</div>

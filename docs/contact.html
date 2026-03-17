@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact | Larisa Portfolio</title>
+    <meta name="description" content="Contact Larisa for student and junior full-stack opportunities and collaboration.">
+    <link rel="canonical" href="https://larisa-e.github.io/dynamiskPortfolio_website/contact.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact | Larisa Portfolio">
+    <meta property="og:description" content="Contact Larisa for student and junior full-stack opportunities and collaboration.">
+    <meta property="og:url" content="https://larisa-e.github.io/dynamiskPortfolio_website/contact.html">
+    <meta property="og:image" content="https://larisa-e.github.io/dynamiskPortfolio_website/assets/images/placeholder.svg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -14,17 +22,20 @@
             <li><a href="index.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html" class="is-active">Contact</a></li>
+            <li><a href="cv.html" class="nav__cta">Download CV</a></li>
         </ul>
     </nav>
 </header>
 <main class="site-main">
 <section class="contact">
     <h1>Contact</h1>
+    <p class="contact__reply-time">I usually reply within 24-48 hours.</p>
     <p id="sent" class="contact__sent">Thank you. Your message has been sent successfully.</p>
     <form action="https://formsubmit.co/larisaeb0289@gmail.com" method="POST" class="contact__form">
         <input type="hidden" name="_subject" value="New portfolio contact message">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off">
         <input type="hidden" name="_next" id="contact-next" value="">
         <label>Name<input type="text" name="name" required></label>
         <label>Email<input type="email" name="email" required></label>

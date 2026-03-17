@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lending Database System (Oracle) | Larisa Portfolio</title>
+    <meta name="description" content="This project models a lending workflow for computers and students using Oracle-first design conventions (VARCHAR2, NUMBER, DATE, CLOB).">
+    <link rel="canonical" href="https://larisa-e.github.io/dynamiskPortfolio_website/projects/lending-database-system-oracle/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lending Database System (Oracle) | Larisa Portfolio">
+    <meta property="og:description" content="This project models a lending workflow for computers and students using Oracle-first design conventions (VARCHAR2, NUMBER, DATE, CLOB).">
+    <meta property="og:url" content="https://larisa-e.github.io/dynamiskPortfolio_website/projects/lending-database-system-oracle/index.html">
+    <meta property="og:image" content="https://larisa-e.github.io/dynamiskPortfolio_website/uploads/lending-db-system.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" as="image" href="../../uploads/lending-db-system.png">
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
@@ -14,6 +23,7 @@
             <li><a href="../../index.html" class="is-active">Projects</a></li>
             <li><a href="../../about.html">About</a></li>
             <li><a href="../../contact.html">Contact</a></li>
+            <li><a href="../../cv.html" class="nav__cta">Download CV</a></li>
         </ul>
     </nav>
 </header>
@@ -22,9 +32,20 @@
     <header class="project-detail__header">
         <h1>Lending Database System (Oracle)</h1>
         <p class="project-detail__tech">Tech stack: Oracle SQL, SQL Developer, PL/SQL Triggers, Views, Data Modeler</p>
+        <div class="project-detail__actions">
+            <a class="project-card__button" href="https://github.com/Larisa-E/lending_db_system" target="_blank" rel="noopener">GitHub repository</a>
+        </div>
     </header>
+    <section class="project-detail__highlights">
+        <h2>Highlights</h2>
+        <ul>
+            <li>Architecture: Built with Oracle SQL, SQL Developer, PL/SQL Triggers, Views, Data Modeler and structured for readability and future extension.</li>
+            <li>Challenge: Modeled relational data carefully to preserve integrity and support realistic reporting/query scenarios.</li>
+            <li>Learning: Strengthened architecture decisions and debugging discipline while turning complex requirements into maintainable output.</li>
+        </ul>
+    </section>
     <a class="project-detail__image-link" href="../../uploads/lending-db-system.png" target="_blank" rel="noopener">
-        <img class="project-detail__image" src="../../uploads/lending-db-system.png" alt="Lending Database System (Oracle)">
+        <img class="project-detail__image" src="../../uploads/lending-db-system.png" alt="Preview image for Lending Database System (Oracle)" loading="lazy" decoding="async">
     </a>
     <p class="project-detail__link"><a href="https://github.com/Larisa-E/lending_db_system" target="_blank" rel="noopener">View project</a></p>
     <div class="project-detail__content">This project models a lending workflow for computers and students using Oracle-first design conventions (VARCHAR2, NUMBER, DATE, CLOB). I built a normalized schema with lookup tables, core transaction tables, constraints, indexes, and triggers that enforce key rules such as blacklist checks and automatic due-date defaults. I also created operational views (V_ACTIVE_LOANS, V_OVERDUE_LOANS, V_AVAILABLE_COMPUTERS, V_LOAN_HISTORY) to simplify common reporting and dashboard-style queries. To extend the workflow, I implemented an email queue simulation that inserts reminders for overdue loans, and documented full environment setup plus ERD reverse-engineering from the live schema.</div>

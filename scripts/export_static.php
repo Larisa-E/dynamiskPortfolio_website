@@ -212,7 +212,76 @@ function build_skill_groups(array $projects): array
     return $grouped;
 }
 
-function shell_page(string $title, string $body, int $depth, string $active): string
+function extract_first_sentence(string $text): string
+{
+    $text = trim(preg_replace('/\s+/', ' ', $text) ?? '');
+    if ($text === '') {
+        return '';
+    }
+
+    $parts = preg_split('/(?<=[.!?])\s+/', $text) ?: [];
+    $sentence = trim($parts[0] ?? $text);
+
+    return $sentence === '' ? $text : $sentence;
+}
+
+function project_outcome_line(array $project): string
+{
+    $short = trim((string) ($project['short_description'] ?? ''));
+    $description = trim((string) ($project['description'] ?? ''));
+    $base = $short !== '' ? $short : $description;
+    if ($base === '') {
+        return '';
+    }
+
+    $sentence = extract_first_sentence($base);
+    return $sentence;
+}
+
+function build_project_highlights(array $project): array
+{
+    $tech = trim((string) ($project['tech'] ?? ''));
+    $description = trim((string) ($project['description'] ?? ''));
+
+    $stack = $tech !== '' ? $tech : 'practical full-stack tooling';
+    $challenge = 'Translated requirements into a clean, maintainable implementation with reliable user flows.';
+
+    $techUpper = strtoupper($tech);
+    if (strpos($techUpper, 'LDAP') !== false || strpos($techUpper, 'ACTIVE DIRECTORY') !== false) {
+        $challenge = 'Handled authentication and identity constraints while keeping session handling secure and predictable.';
+    } elseif (strpos($techUpper, 'SQL') !== false || strpos($techUpper, 'ORACLE') !== false || strpos($techUpper, 'MYSQL') !== false) {
+        $challenge = 'Modeled relational data carefully to preserve integrity and support realistic reporting/query scenarios.';
+    } elseif (strpos($techUpper, 'SIGNALR') !== false || strpos($techUpper, '.NET MAUI') !== false) {
+        $challenge = 'Balanced real-time behavior and UI responsiveness to keep the experience stable across user actions.';
+    }
+
+    $learning = 'Strengthened architecture decisions, debugging discipline, and production-minded delivery from prototype to working result.';
+    if ($description !== '') {
+        $learning = 'Strengthened architecture decisions and debugging discipline while turning complex requirements into maintainable output.';
+    }
+
+    return [
+        'Architecture: Built with ' . $stack . ' and structured for readability and future extension.',
+        'Challenge: ' . $challenge,
+        'Learning: ' . $learning,
+    ];
+}
+
+function build_meta_description(string $fallback, string $body): string
+{
+    $description = trim($fallback);
+    if ($description === '') {
+        $description = extract_first_sentence(strip_tags($body));
+    }
+
+    if (strlen($description) > 160) {
+        $description = rtrim(substr($description, 0, 157)) . '...';
+    }
+
+    return $description;
+}
+
+function shell_page(string $title, string $body, int $depth, string $active, string $description = '', string $canonicalPath = '', string $preloadImage = ''): string
 {
     $prefix = str_repeat('../', $depth);
     $css = $prefix . 'assets/css/style.css';
@@ -220,18 +289,48 @@ function shell_page(string $title, string $body, int $depth, string $active): st
     $home = $prefix . 'index.html';
     $about = $prefix . 'about.html';
     $contact = $prefix . 'contact.html';
+    $cv = $prefix . 'cv.html';
+    $baseUrl = 'https://larisa-e.github.io/dynamiskPortfolio_website/';
+    $normalizedPath = ltrim($canonicalPath, '/');
+    if ($normalizedPath === '') {
+        $normalizedPath = $depth > 0 ? $prefix . 'index.html' : 'index.html';
+    }
+
+    $canonicalUrl = $baseUrl . ltrim(str_replace('../', '', $normalizedPath), '/');
+    $metaDescription = build_meta_description($description, $body);
+    $defaultImage = $baseUrl . 'assets/images/placeholder.svg';
+    $ogImage = $defaultImage;
+    if ($preloadImage !== '') {
+        $normalizedImage = str_replace(['../', './'], '', $preloadImage);
+        $ogImage = $baseUrl . ltrim($normalizedImage, '/');
+    }
 
     $year = date('Y');
 
     $projectsClass = $active === 'projects' ? ' class="is-active"' : '';
     $aboutClass = $active === 'about' ? ' class="is-active"' : '';
     $contactClass = $active === 'contact' ? ' class="is-active"' : '';
+    $cvClass = $active === 'cv' ? ' class="nav__cta is-active"' : ' class="nav__cta"';
+
+    $preloadTag = '';
+    if ($preloadImage !== '') {
+        $preloadTag = '    <link rel="preload" as="image" href="' . e($preloadImage) . '">\n';
+    }
 
     return '<!DOCTYPE html>\n'
         . '<html lang="en">\n<head>\n'
         . '    <meta charset="utf-8">\n'
         . '    <meta name="viewport" content="width=device-width, initial-scale=1">\n'
         . '    <title>' . e($title) . ' | Larisa Portfolio</title>\n'
+        . '    <meta name="description" content="' . e($metaDescription) . '">\n'
+        . '    <link rel="canonical" href="' . e($canonicalUrl) . '">\n'
+        . '    <meta property="og:type" content="website">\n'
+        . '    <meta property="og:title" content="' . e($title) . ' | Larisa Portfolio">\n'
+        . '    <meta property="og:description" content="' . e($metaDescription) . '">\n'
+        . '    <meta property="og:url" content="' . e($canonicalUrl) . '">\n'
+        . '    <meta property="og:image" content="' . e($ogImage) . '">\n'
+        . '    <meta name="twitter:card" content="summary_large_image">\n'
+        . $preloadTag
         . '    <link rel="stylesheet" href="' . e($css) . '">\n'
         . '</head>\n<body>\n'
         . '<header class="site-header">\n'
@@ -241,6 +340,7 @@ function shell_page(string $title, string $body, int $depth, string $active): st
         . '            <li><a href="' . e($home) . '"' . $projectsClass . '>Projects</a></li>\n'
         . '            <li><a href="' . e($about) . '"' . $aboutClass . '>About</a></li>\n'
         . '            <li><a href="' . e($contact) . '"' . $contactClass . '>Contact</a></li>\n'
+        . '            <li><a href="' . e($cv) . '"' . $cvClass . '>Download CV</a></li>\n'
         . '        </ul>\n'
         . '    </nav>\n'
         . '</header>\n'
@@ -271,10 +371,11 @@ $about = $aboutStmt->fetch() ?: null;
 $indexBody = '<section class="home-hero">\n'
     . '    <p class="home-hero__kicker">Full-Stack Developer Portfolio</p>\n'
     . '    <h1 class="home-hero__title">I design and build full-stack web projects with practical UX, strong backend structure, and production-minded workflows.</h1>\n'
-    . '    <p class="home-hero__text">Data Technician student specialized in Programming at Syddansk Erhvervsskole, currently building across frontend, backend, SQL systems, and application architecture.</p>\n'
+    . '    <p class="home-hero__text">Seeking student and junior full-stack opportunities with backend and data focus. Data Technician student specialized in Programming at Syddansk Erhvervsskole, building across frontend, backend, SQL systems, and application architecture.</p>\n'
     . '    <div class="home-hero__actions">\n'
     . '        <a class="project-card__button" href="./contact.html">Contact me</a>\n'
     . '        <a class="project-card__button project-card__button--ghost" href="./about.html">Read my profile</a>\n'
+    . '        <a class="project-card__button project-card__button--ghost" href="./cv.html">Download CV</a>\n'
     . '    </div>\n'
     . '</section>\n';
 
@@ -302,6 +403,32 @@ foreach ($skillsByGroup as $groupName => $skills) {
 $indexBody .= '    </div>\n'
     . '</section>\n';
 
+$featuredProjects = array_slice($projects, 0, 3);
+if ($featuredProjects !== []) {
+    $indexBody .= '<section class="projects-featured">\n'
+        . '    <h2 class="projects-featured__title">Featured Projects</h2>\n'
+        . '    <div class="projects-featured__grid">\n';
+
+    foreach ($featuredProjects as $project) {
+        $slug = $project['slug'];
+        $title = $project['title'];
+        $impact = project_outcome_line($project);
+
+        $indexBody .= '        <article class="featured-project">\n'
+            . '            <h3><a href="./projects/' . rawurlencode($slug) . '/">' . e($title) . '</a></h3>\n';
+
+        if ($impact !== '') {
+            $indexBody .= '            <p class="featured-project__impact">Outcome: ' . e($impact) . '</p>\n';
+        }
+
+        $indexBody .= '            <a class="project-card__button project-card__button--ghost" href="./projects/' . rawurlencode($slug) . '/">View details</a>\n'
+            . '        </article>\n';
+    }
+
+    $indexBody .= '    </div>\n'
+        . '</section>\n';
+}
+
 $indexBody .= '<section class="projects">\n'
     . '    <h2 class="projects__title">Latest Projects</h2>\n'
     . '    <div class="projects__grid">\n';
@@ -325,7 +452,7 @@ foreach ($projects as $project) {
         $media = '<video class="project-card__image" autoplay muted loop playsinline preload="metadata"' . $posterAttr . ' aria-label="' . e($title) . ' demo preview">'
             . '<source src="' . e($src) . '"></video>';
     } else {
-        $media = '<img class="project-card__image" src="' . e($img) . '" alt="' . e($title) . '">';
+        $media = '<img class="project-card__image" src="' . e($img) . '" alt="Preview image for ' . e($title) . '" loading="lazy" decoding="async">';
     }
 
     $indexBody .= '        <article class="project-card">\n'
@@ -342,6 +469,11 @@ foreach ($projects as $project) {
         $indexBody .= '            <p class="project-card__summary">' . e($short) . '</p>\n';
     }
 
+    $impact = project_outcome_line($project);
+    if ($impact !== '') {
+        $indexBody .= '            <p class="project-card__impact">Outcome: ' . e($impact) . '</p>\n';
+    }
+
     $indexBody .= '            <div class="project-card__actions">\n'
         . '                <a class="project-card__button" href="./projects/' . rawurlencode($slug) . '/">View details</a>\n';
 
@@ -355,15 +487,17 @@ foreach ($projects as $project) {
 }
 
 $indexBody .= '    </div>\n</section>\n';
-write_html($docsDir . DIRECTORY_SEPARATOR . 'index.html', shell_page('Projects', $indexBody, 0, 'projects'));
+write_html($docsDir . DIRECTORY_SEPARATOR . 'index.html', shell_page('Projects', $indexBody, 0, 'projects', 'Full-stack portfolio with featured projects across web, backend, and database systems.', 'index.html'));
 
 // about.html
 $aboutBody = '<section class="about">\n';
 $portfolioEmail = 'larisaeb0289@gmail.com';
+$aboutPreloadImage = '';
 
 if ($about) {
     if (!empty($about['profile_image'])) {
         $profileImage = './uploads/profile/' . rawurlencode($about['profile_image']);
+        $aboutPreloadImage = $profileImage;
         $aboutBody .= '    <div class="about__media">\n'
             . '        <img class="about__photo" src="' . e($profileImage) . '" alt="Portrait of ' . e($about['title'] ?: 'Larisa') . '" loading="lazy">\n'
             . '    </div>\n';
@@ -411,6 +545,7 @@ if ($about) {
         $aboutBody .= '    <div class="about__social" aria-label="Find Larisa online">\n';
         if ($portfolioEmail !== '') {
             $aboutBody .= '        <a class="about__social-link" href="mailto:' . e($portfolioEmail) . '">Email</a>\n';
+            $aboutBody .= '        <a class="about__social-link" href="./cv.html">Download CV</a>\n';
         }
         if ($github !== '') {
             $aboutBody .= '        <a class="about__social-link" href="' . e($github) . '" target="_blank" rel="noopener">GitHub</a>\n';
@@ -431,16 +566,18 @@ if ($about) {
 }
 
 $aboutBody .= '</section>\n';
-write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $aboutBody, 0, 'about'));
+write_html($docsDir . DIRECTORY_SEPARATOR . 'about.html', shell_page('About', $aboutBody, 0, 'about', 'About Larisa Elena Bucos: aspiring full-stack developer focused on backend, SQL, and maintainable web solutions.', 'about.html', $aboutPreloadImage));
 
 // contact.html (static)
 $contactBody = '<section class="contact">\n'
     . '    <h1>Contact</h1>\n'
+    . '    <p class="contact__reply-time">I usually reply within 24-48 hours.</p>\n'
     . '    <p id="sent" class="contact__sent">Thank you. Your message has been sent successfully.</p>\n'
     . '    <form action="https://formsubmit.co/' . e($portfolioEmail) . '" method="POST" class="contact__form">\n'
     . '        <input type="hidden" name="_subject" value="New portfolio contact message">\n'
     . '        <input type="hidden" name="_captcha" value="false">\n'
     . '        <input type="hidden" name="_template" value="table">\n'
+    . '        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off">\n'
     . '        <input type="hidden" name="_next" id="contact-next" value="">\n'
     . '        <label>Name<input type="text" name="name" required></label>\n'
     . '        <label>Email<input type="email" name="email" required></label>\n'
@@ -460,7 +597,34 @@ $contactBody = '<section class="contact">\n'
     . '        })();\n'
     . '    </script>\n'
     . '</section>\n';
-write_html($docsDir . DIRECTORY_SEPARATOR . 'contact.html', shell_page('Contact', $contactBody, 0, 'contact'));
+write_html($docsDir . DIRECTORY_SEPARATOR . 'contact.html', shell_page('Contact', $contactBody, 0, 'contact', 'Contact Larisa for student and junior full-stack opportunities and collaboration.', 'contact.html'));
+
+// cv.html
+$cvBody = '<section class="cv">\n'
+    . '    <header class="cv__header">\n'
+    . '        <h1>Curriculum Vitae</h1>\n'
+    . '        <p>Larisa Elena Bucos - Aspiring Full-Stack Developer</p>\n'
+    . '    </header>\n'
+    . '    <div class="cv__grid">\n'
+    . '        <article class="cv__panel">\n'
+    . '            <h2>Profile</h2>\n'
+    . '            <p>Data Technician student specialized in Programming at Syddansk Erhvervsskole, building practical full-stack solutions with strong backend and database foundations.</p>\n'
+    . '        </article>\n'
+    . '        <article class="cv__panel">\n'
+    . '            <h2>Core Stack</h2>\n'
+    . '            <p>PHP, JavaScript, SQL Server, Oracle SQL, MySQL, C#, .NET MAUI, APIs, LDAP/LDAPS.</p>\n'
+    . '        </article>\n'
+    . '        <article class="cv__panel">\n'
+    . '            <h2>Education</h2>\n'
+    . '            <p>Data Technician with specialization in Programming, Syddansk Erhvervsskole (expected graduation: September 2028).</p>\n'
+    . '        </article>\n'
+    . '        <article class="cv__panel">\n'
+    . '            <h2>Links</h2>\n'
+    . '            <p><a href="mailto:' . e($portfolioEmail) . '">Email</a> | <a href="https://github.com/Larisa-E" target="_blank" rel="noopener">GitHub</a> | <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>\n'
+    . '        </article>\n'
+    . '    </div>\n'
+    . '</section>\n';
+write_html($docsDir . DIRECTORY_SEPARATOR . 'cv.html', shell_page('CV', $cvBody, 0, 'cv', 'CV and professional summary for Larisa Elena Bucos.', 'cv.html'));
 
 // Per-project pages
 foreach ($projects as $project) {
@@ -469,6 +633,7 @@ foreach ($projects as $project) {
     $tech = trim((string) ($project['tech'] ?? ''));
     $description = (string) ($project['description'] ?? '');
     $url = trim((string) ($project['url'] ?? ''));
+    $demoVideoUrl = trim((string) ($project['demo_video_url'] ?? ''));
 
     $projectDir = $projectsDir . DIRECTORY_SEPARATOR . $slug;
     if (!is_dir($projectDir)) {
@@ -489,7 +654,28 @@ foreach ($projects as $project) {
         $body .= '        <p class="project-detail__tech">Tech stack: ' . e($tech) . '</p>\n';
     }
 
+    $body .= '        <div class="project-detail__actions">\n';
+    if ($url !== '') {
+        $body .= '            <a class="project-card__button" href="' . e($url) . '" target="_blank" rel="noopener">GitHub repository</a>\n';
+    }
+    if ($demoVideoUrl !== '') {
+        $body .= '            <a class="project-card__button project-card__button--ghost" href="' . e($demoVideoUrl) . '" target="_blank" rel="noopener">Demo / walkthrough</a>\n';
+    }
+    $body .= '        </div>\n';
+
     $body .= '    </header>\n';
+
+    $highlights = build_project_highlights($project);
+    if ($highlights !== []) {
+        $body .= '    <section class="project-detail__highlights">\n'
+            . '        <h2>Highlights</h2>\n'
+            . '        <ul>\n';
+        foreach ($highlights as $highlight) {
+            $body .= '            <li>' . e($highlight) . '</li>\n';
+        }
+        $body .= '        </ul>\n'
+            . '    </section>\n';
+    }
 
     if ($videoMarkup !== '') {
         $body .= '    ' . $videoMarkup . '\n';
@@ -497,7 +683,7 @@ foreach ($projects as $project) {
 
     if (!empty($project['image'])) {
         $body .= '    <a class="project-detail__image-link" href="' . e($imagePath) . '" target="_blank" rel="noopener">\n'
-            . '        <img class="project-detail__image" src="' . e($imagePath) . '" alt="' . e($title) . '">\n'
+                . '        <img class="project-detail__image" src="' . e($imagePath) . '" alt="Preview image for ' . e($title) . '" loading="lazy" decoding="async">\n'
             . '    </a>\n';
     }
 
@@ -509,7 +695,10 @@ foreach ($projects as $project) {
         . '    <p><a href="../../index.html">&larr; Back to projects</a></p>\n'
         . '</article>\n';
 
-    write_html($projectDir . DIRECTORY_SEPARATOR . 'index.html', shell_page($title, $body, 2, 'projects'));
+    write_html(
+        $projectDir . DIRECTORY_SEPARATOR . 'index.html',
+        shell_page($title, $body, 2, 'projects', extract_first_sentence($description), 'projects/' . $slug . '/index.html', $imagePath)
+    );
 }
 
 echo "Static export complete: docs/index.html, docs/about.html, docs/contact.html and project pages generated.\n";

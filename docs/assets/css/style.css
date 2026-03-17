@@ -46,6 +46,14 @@ a:hover {
     text-decoration: underline;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-accent-strong);
+    outline-offset: 3px;
+}
+
 h1,
 h2,
 h3,
@@ -94,6 +102,14 @@ h6 {
     letter-spacing: 0.03em;
 }
 
+.nav__links .nav__cta {
+    color: var(--color-cream);
+    border: 1px solid rgba(242, 202, 122, 0.38);
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(212, 176, 108, 0.16);
+}
+
 .nav__links a:hover,
 .nav__links a:focus {
     color: var(--color-accent-strong);
@@ -110,6 +126,40 @@ h6 {
 .projects {
     display: grid;
     gap: 2rem;
+}
+
+.projects-featured {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.projects-featured__title {
+    font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+}
+
+.projects-featured__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.9rem;
+}
+
+.featured-project {
+    background: rgba(8, 16, 22, 0.54);
+    border: 1px solid rgba(162, 203, 228, 0.14);
+    border-radius: 14px;
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.featured-project h3 {
+    font-size: 1.05rem;
+}
+
+.featured-project__impact {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
 }
 
 .home-hero {
@@ -378,6 +428,14 @@ h6 {
     min-height: 4.4rem;
 }
 
+.project-card__impact {
+    font-size: 0.84rem;
+    color: #d5e7f7;
+    line-height: 1.55;
+    padding-inline-start: 0.5rem;
+    border-inline-start: 2px solid rgba(242, 202, 122, 0.42);
+}
+
 .projects__empty,
 .projects__error {
     background: var(--color-surface);
@@ -619,6 +677,37 @@ h6 {
     line-height: 1.2;
 }
 
+.project-detail__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+}
+
+.project-detail__highlights {
+    background: rgba(7, 15, 22, 0.62);
+    border: 1px solid rgba(166, 206, 229, 0.12);
+    border-radius: 14px;
+    padding: 1rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.project-detail__highlights h2 {
+    font-size: 1.22rem;
+}
+
+.project-detail__highlights ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.project-detail__highlights li {
+    color: var(--color-muted);
+}
+
 .project-detail__content {
     color: var(--color-muted);
     line-height: 1.85;
@@ -653,6 +742,11 @@ h6 {
 
 .contact h1 {
     line-height: 1.2;
+}
+
+.contact__reply-time {
+    color: var(--color-muted);
+    font-size: 0.96rem;
 }
 
 .contact__sent {
@@ -775,6 +869,44 @@ h6 {
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+}
+
+.visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.cv {
+    max-inline-size: 1040px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+}
+
+.cv__header {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.cv__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.85rem;
+}
+
+.cv__panel {
+    background: rgba(7, 15, 22, 0.62);
+    border: 1px solid rgba(166, 206, 229, 0.12);
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    display: grid;
+    gap: 0.4rem;
 }
 
 .contact__errors,

@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PagajClubDB (Kayak Club Database) | Larisa Portfolio</title>
+    <meta name="description" content="PagajClubDB is a normalized relational database designed to manage club members, event arrangements, event images, and internal news.">
+    <link rel="canonical" href="https://larisa-e.github.io/dynamiskPortfolio_website/projects/pagajclubdb-kayak-club-database/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PagajClubDB (Kayak Club Database) | Larisa Portfolio">
+    <meta property="og:description" content="PagajClubDB is a normalized relational database designed to manage club members, event arrangements, event images, and internal news.">
+    <meta property="og:url" content="https://larisa-e.github.io/dynamiskPortfolio_website/projects/pagajclubdb-kayak-club-database/index.html">
+    <meta property="og:image" content="https://larisa-e.github.io/dynamiskPortfolio_website/uploads/pagajclubdb.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" as="image" href="../../uploads/pagajclubdb.png">
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
@@ -14,6 +23,7 @@
             <li><a href="../../index.html" class="is-active">Projects</a></li>
             <li><a href="../../about.html">About</a></li>
             <li><a href="../../contact.html">Contact</a></li>
+            <li><a href="../../cv.html" class="nav__cta">Download CV</a></li>
         </ul>
     </nav>
 </header>
@@ -22,9 +32,20 @@
     <header class="project-detail__header">
         <h1>PagajClubDB (Kayak Club Database)</h1>
         <p class="project-detail__tech">Tech stack: Microsoft SQL Server, T-SQL, ER Modeling, SSMS</p>
+        <div class="project-detail__actions">
+            <a class="project-card__button" href="https://github.com/Larisa-E/PagajClubDB" target="_blank" rel="noopener">GitHub repository</a>
+        </div>
     </header>
+    <section class="project-detail__highlights">
+        <h2>Highlights</h2>
+        <ul>
+            <li>Architecture: Built with Microsoft SQL Server, T-SQL, ER Modeling, SSMS and structured for readability and future extension.</li>
+            <li>Challenge: Modeled relational data carefully to preserve integrity and support realistic reporting/query scenarios.</li>
+            <li>Learning: Strengthened architecture decisions and debugging discipline while turning complex requirements into maintainable output.</li>
+        </ul>
+    </section>
     <a class="project-detail__image-link" href="../../uploads/pagajclubdb.png" target="_blank" rel="noopener">
-        <img class="project-detail__image" src="../../uploads/pagajclubdb.png" alt="PagajClubDB (Kayak Club Database)">
+        <img class="project-detail__image" src="../../uploads/pagajclubdb.png" alt="Preview image for PagajClubDB (Kayak Club Database)" loading="lazy" decoding="async">
     </a>
     <p class="project-detail__link"><a href="https://github.com/Larisa-E/PagajClubDB" target="_blank" rel="noopener">View project</a></p>
     <div class="project-detail__content">PagajClubDB is a normalized relational database designed to manage club members, event arrangements, event images, and internal news. I created schema scripts with clear PK and FK relationships, domain checks, and indexes to support realistic usage patterns and data integrity. The project also includes seed data scripts and query scripts that demonstrate business scenarios such as filtering party events in the clubhouse, listing past events by category, and approving pending news. The deliverable is structured for repeatable execution, validation, and clear documentation through ER diagrams and result screenshots.</div>
