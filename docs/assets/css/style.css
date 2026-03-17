@@ -443,6 +443,10 @@ h6 {
     font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1.75;
+    display: inline;
+    background: rgba(7, 14, 20, 0.28);
+    border-radius: 10px;
+    padding: 0.1rem 0.45rem;
 }
 
 .about__body {
@@ -450,6 +454,13 @@ h6 {
     gap: 0.95rem;
     color: var(--color-muted);
     line-height: 1.85;
+}
+
+.about__body p {
+    display: inline;
+    background: rgba(7, 14, 20, 0.24);
+    border-radius: 10px;
+    padding: 0.15rem 0.5rem;
 }
 
 .about__footer {
@@ -470,10 +481,18 @@ h6 {
 
 .about__panel h2 {
     font-size: 1.2rem;
+    display: inline-block;
+    background: rgba(7, 14, 20, 0.3);
+    border-radius: 10px;
+    padding: 0.08rem 0.5rem;
 }
 
 .about__panel p {
     color: var(--color-muted);
+    display: inline;
+    background: rgba(7, 14, 20, 0.24);
+    border-radius: 10px;
+    padding: 0.15rem 0.5rem;
 }
 
 .about__list {
@@ -481,6 +500,13 @@ h6 {
     display: grid;
     gap: 0.45rem;
     color: var(--color-muted);
+}
+
+.about__list li {
+    display: inline;
+    background: rgba(7, 14, 20, 0.24);
+    border-radius: 10px;
+    padding: 0.12rem 0.45rem;
 }
 
 .about__social {
