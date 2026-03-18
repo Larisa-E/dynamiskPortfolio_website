@@ -600,7 +600,7 @@ $contactBody = '<section class="contact">\n'
 write_html($docsDir . DIRECTORY_SEPARATOR . 'contact.html', shell_page('Contact', $contactBody, 0, 'contact', 'Contact Larisa for student and junior full-stack opportunities and collaboration.', 'contact.html'));
 
 // cv.html
-$cvPdfHref = './Larisa%20Elena%20Bucos_CV%20Resume.pdf';
+$cvPdfHref = './assets/docs/larisa-elena-bucos-cv-resume.pdf';
 $cvBody = '<section class="cv">\n'
     . '    <header class="cv__header">\n'
     . '        <h1>Curriculum Vitae</h1>\n'
